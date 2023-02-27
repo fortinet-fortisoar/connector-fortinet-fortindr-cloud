@@ -18,7 +18,7 @@ class FortiNDR(object):
         self.api_key = config.get('api_key')
         self.verify_ssl = config.get('verify_ssl')
 
-    def make_rest_call(self, url, method, data=None, params=None):
+    def make_rest_call(self, url, method='GET', data=None, params=None):
         try:
             headers = {
                 'Authorization': 'IBToken ' + self.api_key,
@@ -52,6 +52,11 @@ class FortiNDR(object):
             raise ConnectorError(str(err))
 
 
+def build_payload(payload):
+    payload = {k: v for k, v in payload.items() if v is not None and v != ''}
+    return payload
+
+
 def get_pcap_tasks(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.pop('task_uuid', '')
@@ -60,8 +65,8 @@ def get_pcap_tasks(config, params):
         params = {}
     else:
         endpoint = Sensors + 'pcaptasks'
-        params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+        params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -69,8 +74,8 @@ def download_pcap_task_file(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.pop('task_uuid')
     endpoint = Sensors + 'pcaptasks/{0}/download/file'.format(task_uuid)
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     try:
         if response.get('message'):
             return response
@@ -89,7 +94,7 @@ def terminate_pcap_task(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.get('task_uuid')
     endpoint = Sensors + 'pcaptasks/{0}/terminate'.format(task_uuid)
-    response = ndr.make_rest_call(endpoint, 'PUT', params={})
+    response = ndr.make_rest_call(endpoint, method='PUT', params={})
     if response.get('message'):
         return response
     else:
@@ -100,7 +105,7 @@ def delete_pcap_task(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.get('task_uuid')
     endpoint = Sensors + 'pcaptasks/{0}'.format(task_uuid)
-    response = ndr.make_rest_call(endpoint, 'DELETE', params={})
+    response = ndr.make_rest_call(endpoint, method='DELETE', params={})
     if response.get('message'):
         return response
     else:
@@ -112,8 +117,8 @@ def get_sensors(config, params):
     endpoint = Sensors + 'sensors'
     include = params.get('include')
     params.update({'include': [include[i].lower() for i in range(len(include))] if include else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -124,8 +129,8 @@ def get_devices(config, params):
         {'traffic_direction': params.get('traffic_direction').lower() if params.get('traffic_direction') else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -135,8 +140,8 @@ def get_events_telemetry_details(config, params):
     params.update({'interval': params.get('interval').lower() if params.get('interval') else ''})
     params.update({'event_type': EVENT_TYPE.get(params.get('event_type')) if params.get('event_type') else ''})
     params.update({'group_by': GROUP_BY.get(params.get('group_by')) if params.get('group_by') else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -145,8 +150,8 @@ def get_network_telemetry_details(config, params):
     endpoint = Sensors + 'telemetry/network_usage'
     params.update({'interval': Interval.get(params.get('interval')) if params.get('interval') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -155,8 +160,8 @@ def get_packetstats_telemetry_details(config, params):
     endpoint = Sensors + 'telemetry/packetstats'
     params.update({'interval': params.get('interval').lower() if params.get('interval') else ''})
     params.update({'group_by': GROUP_BY.get(params.get('group_by')) if params.get('group_by') else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -169,15 +174,15 @@ def get_entity_tracking(config, params):
         endpoint = Entity_Tracking + 'tracking/mac/{0}'.format(entity_value)
     else:
         endpoint = Entity_Tracking + 'tracking/hostname/{0}'.format(entity_value)
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
 def create_deny_list(config, params):
     ndr = FortiNDR(config)
     endpoint = Entity_Tracking + 'tracking/ip_blacklist'
-    payload = {k: v for k, v in params.items() if v is not None and v != ''}
+    payload = build_payload(params)
     response = ndr.make_rest_call(endpoint, 'POST', data=json.dumps(payload))
     return response
 
@@ -185,7 +190,7 @@ def create_deny_list(config, params):
 def get_deny_list(config, params):
     ndr = FortiNDR(config)
     endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}'.format(params.get('account_uuid'))
-    response = ndr.make_rest_call(endpoint, 'GET', params={})
+    response = ndr.make_rest_call(endpoint, params={})
     return response
 
 
@@ -193,8 +198,8 @@ def update_deny_list(config, params):
     ndr = FortiNDR(config)
     account_uuid = params.pop('account_uuid')
     endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}'.format(account_uuid)
-    payload = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'PUT', data=json.dumps(payload))
+    payload = build_payload(params)
+    response = ndr.make_rest_call(endpoint, method='PUT', data=json.dumps(payload))
     if response.get('message'):
         return response
     else:
@@ -205,7 +210,7 @@ def delete_deny_list(config, params):
     ndr = FortiNDR(config)
     account_uuid = params.get('account_uuid')
     endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}'.format(account_uuid)
-    response = ndr.make_rest_call(endpoint, 'DELETE', params={})
+    response = ndr.make_rest_call(endpoint, method='DELETE', params={})
     if response.get('message'):
         return response
     else:
@@ -217,7 +222,7 @@ def delete_ip_from_deny_list(config, params):
     account_uuid = params.get('account_uuid')
     ip = params.get('ip')
     endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}/{1}'.format(account_uuid, ip)
-    response = ndr.make_rest_call(endpoint, 'DELETE', params={})
+    response = ndr.make_rest_call(endpoint, method='DELETE', params={})
     if response.get('message'):
         return response
     else:
@@ -227,23 +232,23 @@ def delete_ip_from_deny_list(config, params):
 def get_entity_summary(config, params):
     ndr = FortiNDR(config)
     endpoint = Entity + '{0}/summary'.format(params.get('entity'))
-    response = ndr.make_rest_call(endpoint, 'GET', params={})
+    response = ndr.make_rest_call(endpoint, params={})
     return response
 
 
 def get_entity_pdns(config, params):
     ndr = FortiNDR(config)
     endpoint = Entity + '{0}/pdns'.format(params.pop('entity'))
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
 def get_events(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'events'
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -254,8 +259,8 @@ def get_indicators(config, params):
     params.update({'detection_status': [detection_status[i].lower() for i in
                                         range(len(detection_status))] if detection_status else ['active']})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -267,8 +272,8 @@ def get_detections(config, params):
     params.update({'include': [include[i].lower() for i in range(len(include))] if include else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
@@ -277,8 +282,8 @@ def resolve_detection(config, params):
     detection_uuid = params.pop('detection_uuid')
     endpoint = Detection + 'detections/{0}/resolve'.format(detection_uuid)
     params.update({'resolution': Resolution.get(params.get('resolution')) if params.get('resolution') else ''})
-    payload = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'PUT', data=json.dumps(payload))
+    payload = build_payload(params)
+    response = ndr.make_rest_call(endpoint, method='PUT', data=json.dumps(payload))
     if response.get('message'):
         return response
     else:
@@ -294,16 +299,16 @@ def get_detection_rules(config, params):
     params.update({'severity': [severity[i].lower() for i in range(len(severity))] if severity else ''})
     params.update({'confidence': [confidence[i].lower() for i in range(len(confidence))] if confidence else ''})
     params.update({'category': [category[i].lower() for i in range(len(category))] if category else ''})
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
 def get_detection_rule_events(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'rules/{0}/events'.format(params.pop('rule_uuid'))
-    params = {k: v for k, v in params.items() if v is not None and v != ''}
-    response = ndr.make_rest_call(endpoint, 'GET', params=params)
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 

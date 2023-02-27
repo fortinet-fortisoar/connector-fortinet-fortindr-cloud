@@ -6,7 +6,7 @@
   "publisher": "Fortinet",
   "cs_approved": true,
   "cs_compatible": true,
-  "category": "Network Security",
+  "category": "Cloud Security",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
   "ingestion_supported": false,
@@ -385,6 +385,17 @@
           "type": "text",
           "name": "cidr",
           "tooltip": "Specify the CIDR based on which you want to pull devices from the specified subnet from FortiNDR cloud."
+        },
+        {
+          "title": "Detection Muted",
+          "description": "Indicate whether to differentiate between the same IP addresses observed by different sensors. By default, this option is set as true",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "dedup_sensor_id",
+          "tooltip": "Indicate whether to differentiate between the same IP addresses observed by different sensors. By default, this option is set as true",
+          "value": true
         },
         {
           "title": "Traffic Direction",
