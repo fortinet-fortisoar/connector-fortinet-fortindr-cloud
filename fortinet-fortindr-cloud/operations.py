@@ -8,7 +8,7 @@ import requests, json, os
 from django.conf import settings
 from connectors.core.connector import ConnectorError, get_logger
 from connectors.cyops_utilities.builtins import upload_file_to_cyops
-from .constant import *
+from .constants import *
 
 logger = get_logger('fortinet-fortindr-cloud')
 

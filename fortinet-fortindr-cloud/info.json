@@ -259,7 +259,7 @@
     },
     {
       "operation": "get_sensors",
-      "title": "Get All Sensors List",
+      "title": "Get Sensors List",
       "description": "Retrieves a list of all sensors or specific sensor from FortiNDR cloud based on the input parameters that you have specified.",
       "category": "investigation",
       "annotation": "get_sensors",
@@ -334,7 +334,7 @@
     },
     {
       "operation": "get_devices",
-      "title": "Get All Devices List",
+      "title": "Get Devices List",
       "description": "Retrieves a list of all devices from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_devices",
@@ -895,7 +895,7 @@
     },
     {
       "operation": "get_deny_list",
-      "title": "Get All Deny List",
+      "title": "Get Deny List",
       "description": "Retrieves a list of all deny in FortiNDR cloud based on the account UUID you have specified.",
       "category": "investigation",
       "annotation": "get_deny_list",
@@ -1126,7 +1126,7 @@
     },
     {
       "operation": "get_events",
-      "title": "Get All Events List",
+      "title": "Get Events List",
       "description": "Retrieves a list of all events from FortiNDR cloud based on the detection UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_events",
@@ -1279,7 +1279,7 @@
     },
     {
       "operation": "get_indicators",
-      "title": "Get All Indicators List",
+      "title": "Get Indicators List",
       "description": "Retrieves a list of all indicators from FortiNDR cloud based on the rule UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_indicators",
@@ -1384,7 +1384,7 @@
     },
     {
       "operation": "get_detections",
-      "title": "Get All Detections List",
+      "title": "Get Detections List",
       "description": "Retrieves a list of all detections from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detections",
@@ -1637,7 +1637,7 @@
     },
     {
       "operation": "get_detection_rules",
-      "title": "Get All Detection Rules List",
+      "title": "Get Detection Rules List",
       "description": "Retrieves a list of all the detection rules from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detection_rules",
@@ -1888,7 +1888,7 @@
     },
     {
       "operation": "get_detection_rule_events",
-      "title": "Get All Detection Rule Events List",
+      "title": "Get Detection Rule Events List",
       "description": "Retrieves a list of all events for a specific detection rule from FortiNDR cloud based on the rule UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detection_rule_events",
