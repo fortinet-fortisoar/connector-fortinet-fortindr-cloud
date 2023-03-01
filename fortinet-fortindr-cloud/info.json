@@ -9,7 +9,10 @@
   "category": "Cloud Security",
   "icon_small_name": "small.png",
   "icon_large_name": "large.png",
-  "ingestion_supported": false,
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
   "help_online": "",
   "configuration": {
     "fields": [
@@ -1489,7 +1492,7 @@
           "visible": true,
           "type": "datetime",
           "name": "created_start_date",
-          "description": "TSpecify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
+          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
         },
         {
           "title": "Created End DateTime",

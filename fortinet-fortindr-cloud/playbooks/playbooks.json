@@ -8,7 +8,7 @@
       "visible": true,
       "image": null,
       "uuid": "e564ffe6-a7ef-4b2c-8720-873a2fad2527",
-      "id": 313,
+      "id": 329,
       "deletedAt": null,
       "importedBy": [],
       "recordTags": [
@@ -29,7 +29,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": 1677219022,
+          "lastModifyDate": 1677654736,
           "collection": "/api/3/workflow_collections/e564ffe6-a7ef-4b2c-8720-873a2fad2527",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/7195efec-1abc-44ce-87a1-09cce9b85da9",
@@ -71,9 +71,9 @@
                 "params": {
                   "limit": 100,
                   "offset": 0,
-                  "sort_by": "count",
-                  "rule_uuid": "376a54b4-1456-430d-bceb-4ff58bed65d0",
-                  "sort_order": "Descending",
+                  "sort_by": "",
+                  "rule_uuid": "519b44fd-3224-4989-b44c-42b5770f9318",
+                  "sort_order": "",
                   "detection_muted": false,
                   "detection_status": []
                 },
@@ -107,7 +107,7 @@
           "groups": [],
           "priority": null,
           "uuid": "015e74a5-8f2a-4f36-aba3-f382a2d1ba83",
-          "id": 4348,
+          "id": 4589,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -130,7 +130,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": null,
+          "lastModifyDate": 1677660559,
           "collection": "/api/3/workflow_collections/e564ffe6-a7ef-4b2c-8720-873a2fad2527",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/5a4006f0-d802-49e9-9647-ba71547de91f",
@@ -143,13 +143,21 @@
                 "name": "Fortinet FortiNDR Cloud",
                 "config": "",
                 "params": {
-                  "limit": 100,
+                  "limit": "",
                   "muted": false,
-                  "offset": 0,
+                  "offset": "",
                   "status": [],
-                  "sort_by": "First Seen",
+                  "include": "",
+                  "sort_by": "",
+                  "device_ip": "",
+                  "rule_uuid": "",
+                  "sensor_id": "",
                   "muted_rule": false,
-                  "muted_device": false
+                  "sort_order": "",
+                  "account_uuid": "",
+                  "muted_device": false,
+                  "created_end_date": "",
+                  "created_start_date": "2023-02-22T10:02:31.313Z"
                 },
                 "version": "1.0.0",
                 "connector": "fortinet-fortindr-cloud",
@@ -208,7 +216,7 @@
           "groups": [],
           "priority": null,
           "uuid": "13025a16-9033-4fef-9463-57f82a784145",
-          "id": 4349,
+          "id": 4590,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -301,7 +309,7 @@
           "groups": [],
           "priority": null,
           "uuid": "15b9e23c-80f1-4114-b20e-816d7ecad115",
-          "id": 4350,
+          "id": 4591,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -398,13 +406,171 @@
           "groups": [],
           "priority": null,
           "uuid": "19a892ff-5d76-497a-800d-c1e99a61f939",
-          "id": 4337,
+          "id": 4592,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
           "importedBy": [],
           "recordTags": [
             "Fortinet",
+            "fortinet-fortindr-cloud"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Fortinet FortiNDR Cloud > Ingest",
+          "aliasName": null,
+          "tag": null,
+          "description": "This playbook demonstrate the list detections operation.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1677663806,
+          "collection": "/api/3/workflow_collections/e564ffe6-a7ef-4b2c-8720-873a2fad2527",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/dff75ce2-f41d-4906-9859-e8283db150b1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "List Detections",
+              "description": null,
+              "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": false,
+                "workflowReference": "/api/3/workflows/73c48b2a-039f-40f0-b5d2-bbe587d6cc14"
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "7639f85e-cd55-4c70-84a1-d6ccd2e2c2d5"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Last Detection Pull Time",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "macro": "{{vars.steps.List_Detections.macro_name}}",
+                  "value": "{{vars.steps.List_Detections.curr_timestamp}}"
+                },
+                "version": "3.2.2",
+                "connector": "cyops_utilities",
+                "operation": "updatemacro",
+                "operationTitle": "FSR: Create/Update Global Variables",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "be5ee973-cf39-4f34-9063-558f2a59532e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Detection Events",
+              "description": null,
+              "arguments": {
+                "for_each": {
+                  "item": "{{vars.steps.List_Detections.data}}",
+                  "parallel": false,
+                  "condition": ""
+                },
+                "arguments": {
+                  "detection": "{{vars.item}}",
+                  "eventlimit": "{{vars.steps.List_Detections.event_limit}}"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "pass_parent_env": false,
+                "pass_input_record": false,
+                "workflowReference": "/api/3/workflows/ccc02fb0-1610-46ed-a2e5-3bc4427d55c8"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "c55b311c-a92b-475a-8fa2-224114b90391"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "78443ca5-7f0a-4806-b5f7-82fb9ea269b2",
+                "title": "Fortinet FortiNDR Cloud > Ingest",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "params": [],
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "dff75ce2-f41d-4906-9859-e8283db150b1"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> List Detections",
+              "targetStep": "/api/3/workflow_steps/7639f85e-cd55-4c70-84a1-d6ccd2e2c2d5",
+              "sourceStep": "/api/3/workflow_steps/dff75ce2-f41d-4906-9859-e8283db150b1",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6e903592-2516-4c69-ad9e-bc8dd152e78d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Detection Events -> Update Last Detection Pull Time",
+              "targetStep": "/api/3/workflow_steps/be5ee973-cf39-4f34-9063-558f2a59532e",
+              "sourceStep": "/api/3/workflow_steps/c55b311c-a92b-475a-8fa2-224114b90391",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7054c713-14bf-409a-96a0-f582415fbcb8"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "List Detections -> Fetch Detection Events",
+              "targetStep": "/api/3/workflow_steps/c55b311c-a92b-475a-8fa2-224114b90391",
+              "sourceStep": "/api/3/workflow_steps/7639f85e-cd55-4c70-84a1-d6ccd2e2c2d5",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8ddb85e6-ed0b-4ab7-888c-93554f0ae4c5"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "1ded2efd-5a04-48fa-877d-964177e97ada",
+          "id": 4593,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "ingest",
             "fortinet-fortindr-cloud"
           ]
         },
@@ -491,7 +657,7 @@
           "groups": [],
           "priority": null,
           "uuid": "2b771f5f-3710-4724-9397-7c9b1a70e2e1",
-          "id": 4341,
+          "id": 4594,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -587,7 +753,7 @@
           "groups": [],
           "priority": null,
           "uuid": "3e5be3be-c0d4-4486-ba9c-20f45241f880",
-          "id": 4342,
+          "id": 4595,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -680,7 +846,7 @@
           "groups": [],
           "priority": null,
           "uuid": "437cbd26-19df-4bda-a33f-a5222640b598",
-          "id": 4343,
+          "id": 4596,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -773,7 +939,7 @@
           "groups": [],
           "priority": null,
           "uuid": "58687344-f12c-486b-b12f-794da54e541b",
-          "id": 4334,
+          "id": 4597,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -869,7 +1035,7 @@
           "groups": [],
           "priority": null,
           "uuid": "5af9f2fa-46ab-4595-b4f4-51d17017b0e5",
-          "id": 4339,
+          "id": 4598,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -969,13 +1135,224 @@
           "groups": [],
           "priority": null,
           "uuid": "656b6cb7-9882-4da9-8714-733fc0b2cd51",
-          "id": 4351,
+          "id": 4599,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
           "importedBy": [],
           "recordTags": [
             "Fortinet",
+            "fortinet-fortindr-cloud"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Fortinet FortiNDR Cloud > Fetch Detections",
+          "aliasName": null,
+          "tag": null,
+          "description": "Fetches all detections from FortiNDR Cloud based on the input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1677663665,
+          "collection": "/api/3/workflow_collections/e564ffe6-a7ef-4b2c-8720-873a2fad2527",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3cd86ade-728b-4ecc-a296-cf23fbb3e912",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  },
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Pull Detections from Last X Minutes\",\n    \"name\": \"Pull_Sample_Events_in_Past_X_Minutes\",\n    \"type\": \"text\",\n    \"tooltip\": \"Fetch detections from last X minutes. e.g 10\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 10\n  },\n  {\n    \"title\": \"Number of Detections to Fetch\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"integer\",\n    \"value\": 1000,\n    \"name\": \"limit\",\n    \"tooltip\": \"Note: If field is not provided ,then it pull only 100 detections.\"\n  },\n  {\n    \"title\": \"Maximum Events To Pull Per Detection\",\n    \"name\": \"event_limit\",\n    \"type\": \"integer\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"value\": 1000,\n    \"tooltip\": \"Note: If field is not provided ,then it pull only 100 events.\"\n  },\n  {\n    \"title\": \"Status\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"multiselect\",\n    \"name\": \"status\",\n    \"tooltip\": \"Specify the status of the detection based on which you want to retrieve detections from FortiNDR cloud. Possible values are Active or Resolved. By default, this option is set as Active\",\n    \"options\": [\n      \"Active\",\n      \"Resolved\"\n    ]\n  },\n  {\n    \"title\": \"Sort By\",\n    \"tooltip\": \"Name of the field on which you want to sort the result (detections). Possible values are First Seen, Last Seen, Status, Device IP, or Indicator Count. By default, this option is set as First Seen.\",\n    \"required\": false,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"select\",\n    \"name\": \"sort_by\",\n    \"options\": [\n      \"First Seen\",\n      \"Last Seen\",\n      \"Status\",\n      \"Device IP\",\n      \"Indicator Count\"\n    ],\n    \"value\": \"First Seen\"\n  }\n]",
+                  "FortiNDRCloudLastDetectionPullTime": "FortiNDRCloudLastDetectionPullTime_{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}"
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "3cd86ade-728b-4ecc-a296-cf23fbb3e912"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Detections List",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiNDR Cloud",
+                "config": "",
+                "params": {
+                  "limit": "{{vars.limit}}",
+                  "muted": false,
+                  "offset": "",
+                  "status": "{{vars.status}}",
+                  "include": "",
+                  "sort_by": "{{vars.sort_by}}",
+                  "device_ip": "",
+                  "rule_uuid": "",
+                  "sensor_id": "",
+                  "muted_rule": false,
+                  "sort_order": "",
+                  "account_uuid": "",
+                  "muted_device": false,
+                  "created_end_date": "{{vars.curr_timestamp}}",
+                  "created_start_date": "{{vars.last_pull_time}}"
+                },
+                "version": "1.0.0",
+                "connector": "fortinet-fortindr-cloud",
+                "operation": "get_detections",
+                "operationTitle": "Get Detections List",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "570",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4410c93f-d907-412b-b63b-e6cf796d0559"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Time Configuration",
+              "description": null,
+              "arguments": {
+                "curr_timestamp": "{{arrow.get(arrow.utcnow().int_timestamp).strftime('%Y-%m-%dT%H:%M:%S.%fZ')}}",
+                "last_pull_time": "{% if (vars.steps.Get_Macro_Value.data[\"hydra:member\"] | length) < 1%}{{arrow.utcnow().shift(minutes=-vars.Pull_Sample_Events_in_Past_X_Minutes).format('YYYY-MM-DDTHH:mm:ss.ss')}}Z{% else %}{{vars.steps.Get_Macro_Value.data['hydra:member'][0]['value']}}{% endif %}"
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "5f601a2c-617f-471f-a65a-d3403c220641"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Macro Value",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/?format=json&name={{vars.FortiNDRCloudLastDetectionPullTime}}",
+                  "body": "",
+                  "method": "GET"
+                },
+                "version": "3.2.2",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "74a768cc-35be-4eb0-b14b-a7e5e6391ba6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Save Result",
+              "description": null,
+              "arguments": {
+                "data": "{{vars.steps.Get_Detections_List.data.get(\"detections\", [])}}",
+                "macro_name": "{{vars.FortiNDRCloudLastDetectionPullTime}}",
+                "event_limit": "{{vars.event_limit}}",
+                "curr_timestamp": "{{vars.curr_timestamp}}"
+              },
+              "status": null,
+              "top": "705",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "d5c0924d-2a8b-44df-9ad0-60ff3065a1b8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "limit": "1000",
+                "status": "Active",
+                "sort_by": "First Seen",
+                "event_limit": "1000",
+                "Pull_Sample_Events_in_Past_X_Minutes": "10"
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "fc2968de-3de4-4011-9780-7ec32c829cc4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/fc2968de-3de4-4011-9780-7ec32c829cc4",
+              "sourceStep": "/api/3/workflow_steps/3cd86ade-728b-4ecc-a296-cf23fbb3e912",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "24710eb2-8255-429a-9734-be23c965d75c"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Detections List -> Save Result",
+              "targetStep": "/api/3/workflow_steps/d5c0924d-2a8b-44df-9ad0-60ff3065a1b8",
+              "sourceStep": "/api/3/workflow_steps/4410c93f-d907-412b-b63b-e6cf796d0559",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2eb0c223-a1a3-4df3-a7da-ffc43e5528a8"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Macro Value -> Set Time Configuration",
+              "targetStep": "/api/3/workflow_steps/5f601a2c-617f-471f-a65a-d3403c220641",
+              "sourceStep": "/api/3/workflow_steps/74a768cc-35be-4eb0-b14b-a7e5e6391ba6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7935535a-407c-4086-bb3d-e3426e6e90f3"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Get Macro Value",
+              "targetStep": "/api/3/workflow_steps/74a768cc-35be-4eb0-b14b-a7e5e6391ba6",
+              "sourceStep": "/api/3/workflow_steps/fc2968de-3de4-4011-9780-7ec32c829cc4",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8b4b17a0-55e4-442b-a255-a13ab8facf4d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Set Time Configuration -> Get Detections List",
+              "targetStep": "/api/3/workflow_steps/4410c93f-d907-412b-b63b-e6cf796d0559",
+              "sourceStep": "/api/3/workflow_steps/5f601a2c-617f-471f-a65a-d3403c220641",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "d1603a4e-6616-4fb6-8b92-01bd115d0383"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "73c48b2a-039f-40f0-b5d2-bbe587d6cc14",
+          "id": 4600,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "fetch",
             "fortinet-fortindr-cloud"
           ]
         },
@@ -1065,7 +1442,7 @@
           "groups": [],
           "priority": null,
           "uuid": "7b80e92f-a05d-4f24-965f-254cc58984eb",
-          "id": 4352,
+          "id": 4601,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1158,7 +1535,7 @@
           "groups": [],
           "priority": null,
           "uuid": "84943d97-9f39-4adb-8bd5-d0c0b8ab0b9a",
-          "id": 4332,
+          "id": 4602,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1181,7 +1558,7 @@
           "remoteExecutableFlag": false,
           "parameters": [],
           "synchronous": false,
-          "lastModifyDate": null,
+          "lastModifyDate": 1677654565,
           "collection": "/api/3/workflow_collections/e564ffe6-a7ef-4b2c-8720-873a2fad2527",
           "versions": [],
           "triggerStep": "/api/3/workflow_steps/afa467ed-6378-45b0-af41-09ded46b329b",
@@ -1195,7 +1572,8 @@
                 "config": "",
                 "params": {
                   "limit": 100,
-                  "offset": 0
+                  "offset": 0,
+                  "detection_uuid": "86f8d989-8c21-49cb-831e-f6ab4f039161"
                 },
                 "version": "1.0.0",
                 "connector": "fortinet-fortindr-cloud",
@@ -1254,7 +1632,7 @@
           "groups": [],
           "priority": null,
           "uuid": "8bd13990-2c5f-4241-9af7-58ad452e2871",
-          "id": 4347,
+          "id": 4603,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1351,7 +1729,7 @@
           "groups": [],
           "priority": null,
           "uuid": "9851d293-1086-4df5-bb7e-e6c4dea2ea7b",
-          "id": 4335,
+          "id": 4604,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1447,7 +1825,7 @@
           "groups": [],
           "priority": null,
           "uuid": "a4134c14-0e6b-4db1-be4f-f6ce85632185",
-          "id": 4340,
+          "id": 4605,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1540,7 +1918,7 @@
           "groups": [],
           "priority": null,
           "uuid": "a889c457-954d-43cb-8331-d7997e20538f",
-          "id": 4333,
+          "id": 4606,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1637,7 +2015,7 @@
           "groups": [],
           "priority": null,
           "uuid": "acc53d20-45fc-4684-b099-c0df6fc17490",
-          "id": 4330,
+          "id": 4607,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1730,7 +2108,7 @@
           "groups": [],
           "priority": null,
           "uuid": "b8b540ff-2933-4a88-8ece-e2c50026fe2c",
-          "id": 4344,
+          "id": 4608,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -1825,13 +2203,173 @@
           "groups": [],
           "priority": null,
           "uuid": "cafae410-eefc-4e03-a0ea-f099785d5626",
-          "id": 4346,
+          "id": 4609,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
           "importedBy": [],
           "recordTags": [
             "Fortinet",
+            "fortinet-fortindr-cloud"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Fortinet FortiNDR Cloud > Fetch Detection Events",
+          "aliasName": null,
+          "tag": null,
+          "description": "Fetch events for specified detection.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "detection",
+            "eventlimit"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1677664078,
+          "collection": "/api/3/workflow_collections/e564ffe6-a7ef-4b2c-8720-873a2fad2527",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/70533cef-4632-4c41-8ea8-bf892eb04ddf",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "resource": {
+                  "name": "{{vars.detection_data.uuid}}",
+                  "type": "/api/3/picklists/574a6ee2-7265-4701-815e-cff83b053bce",
+                  "state": "/api/3/picklists/a1bac09b-1441-45aa-ad1b-c88744e48e72",
+                  "source": "Fortinet FortiNDR Cloud",
+                  "status": "{{vars.alert[\"status\"] | resolveRange(vars.alerts_status_map)}}",
+                  "severity": "/api/3/picklists/58d0753f-f7e4-403b-953c-b0f521eab759",
+                  "sourceId": "{{vars.detection_data.uuid}}",
+                  "__replace": "true",
+                  "sourcedata": "{{vars.detection_data | toJSON}}",
+                  "description": "<table border=\\\"1\\\"><thead><tr><th width=\\\"250\\\">Fields</th><th width=\\\"250\\\">Values</th></tr></thead>\n<tbody>\n<tr><td>Device IP</td>\n<td>{{vars.detection_data.device_ip}}</td></tr>\n<td>Rule UUID</td>\n<td>{{vars.detection_data.rule_uuid}}</td></tr>\n<td>Sensor ID</td>\n<td>{{vars.detection_data.sensor_id}}</td></tr>\n<td>Status</td>\n<td>{{vars.detection_data.status}}</td></tr>\n</tbody>\n</table>",
+                  "ackSlaStatus": "/api/3/picklists/72979f64-e8b9-4888-a965-957e0ec24818",
+                  "respSlaStatus": "/api/3/picklists/72979f64-e8b9-4888-a965-957e0ec24818",
+                  "priorityWeight": 1,
+                  "escalatedtoincident": "/api/3/picklists/2128a09c-153d-4db3-985d-de6be33deae5",
+                  "alertRemainingAckSLA": 0
+                },
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/alerts",
+                "__recommend": [],
+                "fieldOperation": [],
+                "step_variables": []
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "312830e2-a330-4770-a414-04807c92a3ce"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Events List",
+              "description": null,
+              "arguments": {
+                "name": "Fortinet FortiNDR Cloud",
+                "config": "",
+                "params": {
+                  "limit": "{{vars.input.params.eventlimit}}",
+                  "offset": "",
+                  "detection_uuid": "{{vars.input.params.detection.uuid}}"
+                },
+                "version": "1.0.0",
+                "connector": "fortinet-fortindr-cloud",
+                "operation": "get_events",
+                "operationTitle": "Get Events List",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "53a164ab-4389-4908-b79f-975fe9bb6ea2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  }
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "70533cef-4632-4c41-8ea8-bf892eb04ddf"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "detection": "{% set detection = vars.input.params['detection'].update({'events': vars.steps.Get_Events_List.data.events})%}",
+                "detection_data": "{{vars.input.params.detection}}",
+                "alert_status_map": "{'active': {{\"AlertStatus\"| picklist(\"Open\")}}, 'resolved': {{\"AlertStatus\"| picklist(\"Closed\")}}}"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "8983f794-97bb-4821-a65a-dfa63f39f818"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get Events List",
+              "targetStep": "/api/3/workflow_steps/53a164ab-4389-4908-b79f-975fe9bb6ea2",
+              "sourceStep": "/api/3/workflow_steps/70533cef-4632-4c41-8ea8-bf892eb04ddf",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2f138b16-45d4-4cde-94e6-d8e219cc3f30"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Events List -> Configuration",
+              "targetStep": "/api/3/workflow_steps/8983f794-97bb-4821-a65a-dfa63f39f818",
+              "sourceStep": "/api/3/workflow_steps/53a164ab-4389-4908-b79f-975fe9bb6ea2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c43c16d4-de76-4a1b-ae3f-d318e5cf5df0"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Create Record",
+              "targetStep": "/api/3/workflow_steps/312830e2-a330-4770-a414-04807c92a3ce",
+              "sourceStep": "/api/3/workflow_steps/8983f794-97bb-4821-a65a-dfa63f39f818",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "07979009-6de1-410a-a9a7-2a96cb18f9fa"
+            }
+          ],
+          "groups": [],
+          "priority": "/api/3/picklists/2b563c61-ae2c-41c0-a85a-c9709585e3f2",
+          "uuid": "ccc02fb0-1610-46ed-a2e5-3bc4427d55c8",
+          "id": 4610,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "create",
             "fortinet-fortindr-cloud"
           ]
         },
@@ -1920,7 +2458,7 @@
           "groups": [],
           "priority": null,
           "uuid": "d48c5aea-cc66-4434-b42d-b6c8c99c60ee",
-          "id": 4336,
+          "id": 4611,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -2013,7 +2551,7 @@
           "groups": [],
           "priority": null,
           "uuid": "e8d382d3-5715-484b-854b-b9b36792e502",
-          "id": 4331,
+          "id": 4612,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -2106,7 +2644,7 @@
           "groups": [],
           "priority": null,
           "uuid": "f179a67b-7966-40e2-a9f4-4e1c391637e0",
-          "id": 4345,
+          "id": 4613,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -2201,7 +2739,7 @@
           "groups": [],
           "priority": null,
           "uuid": "f3b68dcf-cbc8-493d-b94f-89db1a6b521c",
-          "id": 4338,
+          "id": 4614,
           "owners": [],
           "isPrivate": false,
           "deletedAt": null,
@@ -2216,6 +2754,10 @@
   ],
   "exported_tags": [
     "Fortinet",
-    "fortinet-fortindr-cloud"
+    "fortinet-fortindr-cloud",
+    "dataingestion",
+    "ingest",
+    "fetch",
+    "create"
   ]
 }
