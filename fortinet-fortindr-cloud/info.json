@@ -344,89 +344,81 @@
       "enabled": true,
       "parameters": [
         {
-          "title": "Sensor ID",
-          "description": "Specify the ID of the sensor based on which you want to retrieve devices from FortiNDR cloud.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "sensor_id"
-        },
-        {
           "title": "Account UUID",
           "description": "Specify the UUID of the account based on which you want to retrieve devices from FortiNDR cloud.",
-          "required": false,
+          "required": true,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "account_uuid"
         },
         {
-          "title": "Start DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "datetime",
-          "name": "start_date"
-        },
-        {
-          "title": "End DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "datetime",
-          "name": "end_date"
-        },
-        {
-          "title": "CIDR",
-          "description": "Specify the CIDR based on which you want to pull devices from the specified subnet from FortiNDR cloud.",
+          "title": "Device IP",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
-          "name": "cidr",
-          "tooltip": "Specify the CIDR based on which you want to pull devices from the specified subnet from FortiNDR cloud."
+          "name": "device_ip",
+          "description": "Only include detections with the specified device IP."
         },
         {
-          "title": "Detection Muted",
-          "description": "Indicate whether to differentiate between the same IP addresses observed by different sensors. By default, this option is set as true",
+          "title": "Muted",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "checkbox",
-          "name": "dedup_sensor_id",
-          "tooltip": "Indicate whether to differentiate between the same IP addresses observed by different sensors. By default, this option is set as true",
-          "value": true
+          "name": "muted",
+          "description": "Filter devices by whether or not the devices is muted. By default, this option is set as false",
+          "value": false
         },
         {
-          "title": "Traffic Direction",
-          "description": "Specify the traffic detection based on which you want to retrieve devices from FortiNDR cloud. Possible values are Internal or External.",
+          "title": "Muted Device",
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "select",
-          "name": "traffic_direction",
+          "type": "checkbox",
+          "name": "muted_device",
+          "description": "Filter detections by whether the device is muted. By default, this option is set as false",
+          "value": false
+        },
+        {
+          "title": "Muted Rule",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "muted_rule",
+          "description": "Filter detections by whether the rule is muted. By default, this option is set as false",
+          "value": false
+        },
+        {
+          "title": "Status",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "multiselect",
+          "name": "status",
+          "description": "Specify the status of the detection based on which you want to retrieve detections from FortiNDR cloud. Possible values are Active or Resolved. By default, this option is set as Active",
           "options": [
-            "Internal",
-            "External"
+            "Active",
+            "Resolved"
           ]
         },
         {
           "title": "Sort By",
-          "description": "Name of the field on which you want to sort the result (devices). Possible values are IP Address, Internal or External. By default, this option is set as IP Address",
+          "description": "Name of the field on which you want to sort the result (devices). Possible values are Device IP, Detection Count, Last Seen or Threat Score. By default, this option is set as Last Seen",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "select",
           "name": "sort_by",
           "options": [
-            "IP Address",
-            "Internal",
-            "External"
+            "Device IP",
+            "Detection Count",
+            "Last Seen",
+            "Threat Score"
           ],
-          "value": "IP Address"
+          "value": "Last Seen"
         },
         {
           "title": "Sort Order",
@@ -440,20 +432,45 @@
             "Ascending",
             "Descending"
           ],
-          "value": "Ascending"
+          "value": "Descending"
+        },
+        {
+          "title": "Limit",
+          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 100
+        },
+        {
+          "title": "Offset",
+          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "offset",
+          "value": 0
         }
       ],
       "output_schema": {
-        "device_list": [
+        "result_count": "",
+        "total_count": "",
+        "devices": [
           {
-            "ip_address": "",
-            "date": "",
-            "internal": "",
-            "external": ""
+            "account_uuid": "",
+            "device_ip": "",
+            "threat_score": "",
+            "detections_count": "",
+            "last_seen": ""
           }
         ],
-        "result_count": "",
-        "return_count": ""
+        "sort_by": "",
+        "sort_order": "",
+        "offset": "",
+        "limit": ""
       }
     },
     {
@@ -1887,6 +1904,74 @@
         "sort_order": "",
         "offset": "",
         "limit": ""
+      }
+    },
+    {
+      "operation": "get_detection_rule_details",
+      "title": "Get Detection Rule Details",
+      "description": "Retrieves a specific detection rule information from FortiNDR cloud based on the rule uuid you have specified.",
+      "category": "investigation",
+      "annotation": "get_detection_rules",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Rule UUID",
+          "description": "Specify the UUID of the rule based on which you want to retrieve detection rule events from FortiNDR cloud. Note: Get \"Rule UUID\" value from \"Get All Detections List\" operation response.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "rule_uuid",
+          "tooltip": "Specify the UUID of the rule based on which you want to retrieve detection rule details from FortiNDR cloud. Note: Get \"Rule UUID\" value from \"Get All Detections List\" operation response."
+        }
+      ],
+      "output_schema": {
+        "rule": {
+          "uuid": "",
+          "account_uuid": "",
+          "shared_account_uuids": "",
+          "run_account_uuids": "",
+          "name": "",
+          "category": "",
+          "query_signature": "",
+          "description": "",
+          "severity": "",
+          "confidence": "",
+          "auto_resolution_minutes": "",
+          "enabled": "",
+          "created_user_uuid": "",
+          "created": "",
+          "updated_user_uuid": "",
+          "updated": "",
+          "critical_updated": "",
+          "primary_attack_id": "",
+          "secondary_attack_id": "",
+          "specificity": "",
+          "rule_accounts": [
+            {
+              "account_uuid": "",
+              "query_filter": "",
+              "muted": "",
+              "muted_comment": "",
+              "muted_user_uuid": "",
+              "muted_timestamp": "",
+              "detection_count": "",
+              "detection_muted_count": "",
+              "detection_resolved_count": "",
+              "first_seen": "",
+              "last_seen": ""
+            }
+          ],
+          "device_ip_fields": [],
+          "indicator_fields": [],
+          "source_excludes": []
+        },
+        "accounts": [
+          {
+            "uuid": "",
+            "name": ""
+          }
+        ]
       }
     },
     {

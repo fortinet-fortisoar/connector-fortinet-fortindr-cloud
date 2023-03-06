@@ -124,9 +124,8 @@ def get_sensors(config, params):
 
 def get_devices(config, params):
     ndr = FortiNDR(config)
-    endpoint = Sensors + 'devices'
-    params.update(
-        {'traffic_direction': params.get('traffic_direction').lower() if params.get('traffic_direction') else ''})
+    endpoint = Detection + 'devices'
+    params.update({'status': params.get('status').lower() if params.get('status') else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
     params = build_payload(params)
@@ -304,6 +303,13 @@ def get_detection_rules(config, params):
     return response
 
 
+def get_detection_rule_details(config, params):
+    ndr = FortiNDR(config)
+    endpoint = Detection + 'rules/{0}'.format(params.get('rule_uuid'))
+    response = ndr.make_rest_call(endpoint, params={})
+    return response
+
+
 def get_detection_rule_events(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'rules/{0}/events'.format(params.pop('rule_uuid'))
@@ -355,5 +361,6 @@ operations = {
     'get_detections': get_detections,
     'resolve_detection': resolve_detection,
     'get_detection_rules': get_detection_rules,
+    'get_detection_rule_details': get_detection_rule_details,
     'get_detection_rule_events': get_detection_rule_events
 }
