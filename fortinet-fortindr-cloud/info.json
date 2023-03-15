@@ -495,7 +495,7 @@
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "text",
+          "type": "datetime",
           "name": "start_date",
           "tooltip": "The start date to filter the network usage telemetry."
         },
@@ -505,7 +505,7 @@
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "text",
+          "type": "datetime",
           "name": "end_date",
           "tooltip": "The end date to filter the network usage telemetry."
         },
