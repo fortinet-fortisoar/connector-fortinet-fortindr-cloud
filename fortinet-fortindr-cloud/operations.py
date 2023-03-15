@@ -37,6 +37,8 @@ class FortiNDR(object):
                     return dict()
             elif response.status_code == 404:
                 return {"message": "Not Found"}
+            elif response.status_code == 500:
+                raise ConnectorError("Internal Server Error")
             else:
                 raise ConnectorError("{0}".format(response.content))
         except requests.exceptions.SSLError:
@@ -125,7 +127,8 @@ def get_sensors(config, params):
 def get_devices(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'devices'
-    params.update({'status': params.get('status').lower() if params.get('status') else ''})
+    status = params.get('status')
+    params.update({'status': [status[i].lower() for i in range(len(status))] if status else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
     params = build_payload(params)
