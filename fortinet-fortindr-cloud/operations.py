@@ -308,7 +308,8 @@ def get_detection_rules(config, params):
 
 def get_detection_rule_details(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'rules/{0}'.format(params.get('rule_uuid'))
+    rule_uuid = params.pop('rule_uuid')
+    endpoint = Detection + 'rules/{0}'.format(rule_uuid)
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
