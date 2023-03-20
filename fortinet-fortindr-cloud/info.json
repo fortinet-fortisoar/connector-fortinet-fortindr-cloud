@@ -798,7 +798,13 @@
           "visible": true,
           "type": "json",
           "name": "ip_blacklist_entries",
-          "tooltip": "A list of IP-objects."
+          "tooltip": "A list of IP-objects.",
+          "value": [
+            {
+              "ip": "10.0.0.0",
+              "description": "proxy"
+            }
+          ]
         }
       ],
       "output_schema": {
@@ -870,7 +876,11 @@
           "visible": true,
           "type": "json",
           "name": "ip_blacklist_entry",
-          "tooltip": "The IP object to add or update."
+          "tooltip": "The IP object to add or update.",
+          "value": {
+            "ip": "10.0.0.0",
+            "description": "Updated proxy"
+          }
         }
       ],
       "output_schema": {
@@ -999,7 +1009,7 @@
           "type": "select",
           "name": "record_type",
           "description": "Specify the type of the record based on which you want to retrieve entity passive DNS from FortiNDR cloud. Possible values are A, AAAA, CNAME, MX, or NS",
-          "option": [
+          "options": [
             "A",
             "AAAA",
             "CNAME",
@@ -1226,6 +1236,7 @@
             "Ascending",
             "Descending"
           ],
+          "value": "Descending",
           "tooltip": "Direction of sort: Ascending, Descending. By default, this option is set as Descending"
         },
         {
@@ -1653,7 +1664,7 @@
         {
           "title": "Rule UUID",
           "description": "Specify the UUID of the rule based on which you want to retrieve events from FortiNDR cloud.",
-          "required": true,
+          "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
@@ -2035,6 +2046,16 @@
           "type": "text",
           "name": "rule_uuid",
           "tooltip": "Only include rule sub-objects for a specific account. Note: Get \"Rule UUID\" value from \"Get All Detections List\" operation response."
+        },
+        {
+          "title": "Rule Account UUID",
+          "tooltip": "Only include sub-objects for the specified account.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "rule_account_uuid",
+          "description": "Only include sub-objects for the specified account."
         }
       ],
       "output_schema": {
