@@ -16,6 +16,7 @@ SORT_BY = {
     'First Seen': 'first_seen',
     'Status': 'status',
     'Device IP': 'device_ip',
+    'IP': 'ip',
     'Detection Count': 'detection_count',
     'Threat Score': 'threat_score',
     'Indicator Count': 'indicator_count',
