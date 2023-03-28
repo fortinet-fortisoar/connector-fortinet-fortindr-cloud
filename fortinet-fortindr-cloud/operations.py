@@ -118,16 +118,18 @@ def get_sensors(config, params):
     ndr = FortiNDR(config)
     endpoint = Sensors + 'sensors'
     include = params.get('include')
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'include': [include[i].lower() for i in range(len(include))] if include else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
-def get_devices(config, params):
+def get_devices_with_detection(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'devices'
     status = params.get('status')
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'status': [status[i].lower() for i in range(len(status))] if status else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
@@ -136,9 +138,10 @@ def get_devices(config, params):
     return response
 
 
-def get_events_telemetry_details(config, params):
+def get_telemetry_events(config, params):
     ndr = FortiNDR(config)
     endpoint = Sensors + 'telemetry/events'
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'interval': params.get('interval').lower() if params.get('interval') else ''})
     params.update({'event_type': EVENT_TYPE.get(params.get('event_type')) if params.get('event_type') else ''})
     params.update({'group_by': GROUP_BY.get(params.get('group_by')) if params.get('group_by') else ''})
@@ -147,7 +150,7 @@ def get_events_telemetry_details(config, params):
     return response
 
 
-def get_network_telemetry_details(config, params):
+def get_telemetry_bandwidth(config, params):
     ndr = FortiNDR(config)
     endpoint = Sensors + 'telemetry/network_usage'
     params.update({'interval': Interval.get(params.get('interval')) if params.get('interval') else ''})
@@ -157,7 +160,7 @@ def get_network_telemetry_details(config, params):
     return response
 
 
-def get_packetstats_telemetry_details(config, params):
+def get_telemetry_packetstats(config, params):
     ndr = FortiNDR(config)
     endpoint = Sensors + 'telemetry/packetstats'
     params.update({'interval': params.get('interval').lower() if params.get('interval') else ''})
@@ -176,59 +179,10 @@ def get_entity_tracking(config, params):
         endpoint = Entity_Tracking + 'tracking/mac/{0}'.format(entity_value)
     else:
         endpoint = Entity_Tracking + 'tracking/hostname/{0}'.format(entity_value)
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
-
-
-def create_deny_list(config, params):
-    ndr = FortiNDR(config)
-    endpoint = Entity_Tracking + 'tracking/ip_blacklist'
-    payload = build_payload(params)
-    response = ndr.make_rest_call(endpoint, 'POST', data=json.dumps(payload))
-    return response
-
-
-def get_deny_list(config, params):
-    ndr = FortiNDR(config)
-    endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}'.format(params.get('account_uuid'))
-    response = ndr.make_rest_call(endpoint, params={})
-    return response
-
-
-def update_deny_list(config, params):
-    ndr = FortiNDR(config)
-    account_uuid = params.pop('account_uuid')
-    endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}'.format(account_uuid)
-    payload = build_payload(params)
-    response = ndr.make_rest_call(endpoint, method='PUT', data=json.dumps(payload))
-    if response.get('message'):
-        return response
-    else:
-        return {'message': 'Successfully updated deny list {0}'.format(account_uuid)}
-
-
-def delete_deny_list(config, params):
-    ndr = FortiNDR(config)
-    account_uuid = params.get('account_uuid')
-    endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}'.format(account_uuid)
-    response = ndr.make_rest_call(endpoint, method='DELETE', params={})
-    if response.get('message'):
-        return response
-    else:
-        return {'message': 'Successfully deleted deny list {0}'.format(account_uuid)}
-
-
-def delete_ip_from_deny_list(config, params):
-    ndr = FortiNDR(config)
-    account_uuid = params.get('account_uuid')
-    ip = params.get('ip')
-    endpoint = Entity_Tracking + 'tracking/ip_blacklist/{0}/{1}'.format(account_uuid, ip)
-    response = ndr.make_rest_call(endpoint, method='DELETE', params={})
-    if response.get('message'):
-        return response
-    else:
-        return {'message': 'Successfully deleted IP {0} from deny list {1}'.format(ip, account_uuid)}
 
 
 def get_entity_summary(config, params):
@@ -241,12 +195,13 @@ def get_entity_summary(config, params):
 def get_entity_pdns(config, params):
     ndr = FortiNDR(config)
     endpoint = Entity + '{0}/pdns'.format(params.pop('entity'))
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
 
 
-def get_events(config, params):
+def get_detection_events(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'events'
     params = build_payload(params)
@@ -254,7 +209,7 @@ def get_events(config, params):
     return response
 
 
-def get_indicators(config, params):
+def get_detection_rule_indicators(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'indicators/rule_counts'
     detection_status = params.get('detection_status')
@@ -270,6 +225,7 @@ def get_detections(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'detections'
     status, include = params.get('status'), params.get('include')
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'status': [status[i].lower() for i in range(len(status))] if status else ['active']})
     params.update({'include': [include[i].lower() for i in range(len(include))] if include else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
@@ -296,6 +252,7 @@ def get_detection_rules(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'rules'
     severity, confidence, category = params.get('severity'), params.get('confidence'), params.get('category')
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
     params.update({'severity': [severity[i].lower() for i in range(len(severity))] if severity else ''})
@@ -318,6 +275,7 @@ def get_detection_rule_details(config, params):
 def get_detection_rule_events(config, params):
     ndr = FortiNDR(config)
     endpoint = Detection + 'rules/{0}/events'.format(params.pop('rule_uuid'))
+    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
@@ -344,23 +302,18 @@ def _check_health(config):
 
 
 operations = {
-    'get_events': get_events,
-    'get_indicators': get_indicators,
+    'get_detection_events': get_detection_events,
+    'get_detection_rule_indicators': get_detection_rule_indicators,
     'get_pcap_tasks': get_pcap_tasks,
     'download_pcap_task_file': download_pcap_task_file,
     'terminate_pcap_task': terminate_pcap_task,
     'delete_pcap_task': delete_pcap_task,
     'get_sensors': get_sensors,
-    'get_devices': get_devices,
-    'get_events_telemetry_details': get_events_telemetry_details,
-    'get_network_telemetry_details': get_network_telemetry_details,
-    'get_packetstats_telemetry_details': get_packetstats_telemetry_details,
+    'get_devices_with_detection': get_devices_with_detection,
+    'get_telemetry_events': get_telemetry_events,
+    'get_telemetry_bandwidth': get_telemetry_bandwidth,
+    'get_telemetry_packetstats': get_telemetry_packetstats,
     'get_entity_tracking': get_entity_tracking,
-    'create_deny_list': create_deny_list,
-    'get_deny_list': get_deny_list,
-    'update_deny_list': update_deny_list,
-    'delete_deny_list': delete_deny_list,
-    'delete_ip_from_deny_list': delete_ip_from_deny_list,
     'get_entity_summary': get_entity_summary,
     'get_entity_pdns': get_entity_pdns,
     'get_detections': get_detections,

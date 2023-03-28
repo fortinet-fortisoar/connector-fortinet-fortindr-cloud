@@ -18,12 +18,21 @@
     "fields": [
       {
         "title": "API Token",
-        "description": "Specify the API Token used to access the Fortinet FortiNDR Cloud server to which you will connect and perform the automated operations.",
+        "description": "Specify the API Token used to access the FortiNDR Cloud server to which you will connect and perform the automated operations.",
         "type": "password",
         "name": "api_key",
         "required": true,
         "editable": true,
         "visible": true
+      },
+      {
+        "title": "Account UUID",
+        "description": "Specify the UUID of the account used to access the FortiNDR Cloud server to which you will connect and perform the automated operations.",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "name": "account_uuid"
       },
       {
         "title": "Verify SSL",
@@ -284,16 +293,6 @@
           "tooltip": "Fetch the specified sensor."
         },
         {
-          "title": "Account UUID",
-          "description": "Specify the UUID of the account based on which you want to retrieve sensors from FortiNDR cloud.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "tooltip": "Fetch sensors from the specified account."
-        },
-        {
           "title": "Account Code",
           "description": "Specify the code of the account based on which you want to retrieve sensors from FortiNDR cloud.",
           "required": false,
@@ -345,11 +344,11 @@
       }
     },
     {
-      "operation": "get_events_telemetry_details",
-      "title": "Get Events Telemetry Details",
-      "description": "Retrieves details for events telemetry from FortiNDR cloud based on the input parameters you have specified.",
+      "operation": "get_telemetry_events",
+      "title": "Get Telemetry Events",
+      "description": "Retrieves details for telemetry events from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
-      "annotation": "get_events_telemetry_details",
+      "annotation": "get_telemetry_events",
       "enabled": true,
       "parameters": [
         {
@@ -361,16 +360,6 @@
           "type": "text",
           "name": "sensor_id",
           "tooltip": "Fetch telemetry for the specified sensor."
-        },
-        {
-          "title": "Account UUID",
-          "description": "Specify the UUID of the account based on which you want to retrieve events telemetry from FortiNDR cloud.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "tooltip": "Fetch telemetry for the specified account."
         },
         {
           "title": "Account Code",
@@ -472,11 +461,11 @@
       }
     },
     {
-      "operation": "get_network_telemetry_details",
-      "title": "Get Network Telemetry Details",
-      "description": "Retrieves details for network telemetry from FortiNDR cloud based on the input parameters you have specified.",
+      "operation": "get_telemetry_bandwidth",
+      "title": "Get Telemetry Bandwidth",
+      "description": "Retrieves details for telemetry bandwidth from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
-      "annotation": "get_network_telemetry_details",
+      "annotation": "get_telemetry_bandwidth",
       "enabled": true,
       "parameters": [
         {
@@ -589,11 +578,11 @@
       }
     },
     {
-      "operation": "get_packetstats_telemetry_details",
-      "title": "Get Packetstats Telemetry Details",
-      "description": "Retrieves details for packetstats telemetry from FortiNDR cloud based on the input parameters you have specified.",
+      "operation": "get_telemetry_packetstats",
+      "title": "Get Telemetry Packetstats",
+      "description": "Retrieves details for telemetry packetstats from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
-      "annotation": "get_packetstats_telemetry_details",
+      "annotation": "get_telemetry_packetstats",
       "enabled": true,
       "parameters": [
         {
@@ -711,16 +700,6 @@
           "placeholder": "E.g 1.1.1.1, google.com, etc."
         },
         {
-          "title": "Account UUID",
-          "tooltip": "The Account UUID to filter by.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to retrieve entity tracking from FortiNDR cloud."
-        },
-        {
           "title": "Start DateTime",
           "tooltip": "The start time (inclusive) of the DHCP interval to query by.",
           "required": false,
@@ -773,177 +752,6 @@
       }
     },
     {
-      "operation": "create_deny_list",
-      "title": "Create Deny List",
-      "description": "Creates a new IP deny list in FortiNDR cloud based on the account UUID and IP blacklist that you have specified.",
-      "category": "investigation",
-      "annotation": "create_deny_list",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Account UUID",
-          "tooltip": "The Account UUID of the the target account.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to create a deny list in FortiNDR cloud."
-        },
-        {
-          "title": "IP Blacklist",
-          "description": "Specify the IP blacklist based on which you want to create a deny list in FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "json",
-          "name": "ip_blacklist_entries",
-          "tooltip": "A list of IP-objects.",
-          "value": [
-            {
-              "ip": "10.0.0.0",
-              "description": "proxy"
-            }
-          ]
-        }
-      ],
-      "output_schema": {
-        "ip_blacklist": {
-          "account_uuid": "",
-          "ip_blacklist_entries": [
-            {
-              "ip": "",
-              "description": ""
-            }
-          ]
-        }
-      }
-    },
-    {
-      "operation": "get_deny_list",
-      "title": "Get Deny List",
-      "description": "Retrieves a list of all deny in FortiNDR cloud based on the account UUID you have specified.",
-      "category": "investigation",
-      "annotation": "get_deny_list",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Account UUID",
-          "tooltip": "Specify the UUID of the account based on which you want to retrieve a deny list from FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to retrieve a deny list from FortiNDR cloud."
-        }
-      ],
-      "output_schema": {
-        "ip_blacklist": {
-          "account_uuid": "",
-          "ip_blacklist_entries": [
-            {
-              "ip": "",
-              "description": ""
-            }
-          ]
-        }
-      }
-    },
-    {
-      "operation": "update_deny_list",
-      "title": "Update Deny List",
-      "description": "Updates a new IP deny list in FortiNDR cloud based on the account UUID and IP blacklist that you have specified.",
-      "category": "investigation",
-      "annotation": "update_deny_list",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Account UUID",
-          "tooltip": "Specify the UUID of the account based on which you want to add/update a deny list in FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to add/update a deny list in FortiNDR cloud."
-        },
-        {
-          "title": "IP Blacklist",
-          "description": "Specify the IP blacklist based on which you want to add/update a deny list in FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "json",
-          "name": "ip_blacklist_entry",
-          "tooltip": "The IP object to add or update.",
-          "value": {
-            "ip": "10.0.0.0",
-            "description": "Updated proxy"
-          }
-        }
-      ],
-      "output_schema": {
-        "message": ""
-      }
-    },
-    {
-      "operation": "delete_deny_list",
-      "title": "Delete Deny List",
-      "description": "Deletes a list of deny in FortiNDR cloud based on the account UUID you have specified.",
-      "category": "investigation",
-      "annotation": "delete_deny_list",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Account UUID",
-          "tooltip": "Specify the UUID of the account based on which you want to delete a deny list in FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to delete a deny list in FortiNDR cloud."
-        }
-      ],
-      "output_schema": {
-        "message": ""
-      }
-    },
-    {
-      "operation": "delete_ip_from_deny_list",
-      "title": "Delete IP from Deny List",
-      "description": "Delete a specific IP from deny list in FortiNDR cloud based on the account UUID and IP address that you have specified.",
-      "category": "investigation",
-      "annotation": "delete_ip_from_deny_list",
-      "enabled": true,
-      "parameters": [
-        {
-          "title": "Account UUID",
-          "tooltip": "Specify the UUID of the account based on which you want to delete a IP from deny list in FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to delete a IP from deny list in FortiNDR cloud."
-        },
-        {
-          "title": "IP Address",
-          "tooltip": "Specify the IP address which you want to delete from deny list in FortiNDR cloud.",
-          "required": true,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "ip",
-          "description": "Specify the IP address which you want to delete from deny list in FortiNDR cloud."
-        }
-      ],
-      "output_schema": {
-        "message": ""
-      }
-    },
-    {
       "operation": "get_entity_summary",
       "title": "Get Entity Summary",
       "description": "Retrieves a summary information about an IP address or domain from FortiNDR cloud based on the IP/Domain that you have specified.",
@@ -990,16 +798,6 @@
           "type": "text",
           "name": "entity",
           "description": "Specify the IP/Domain based on which you want to retrieve entity passive DNS from FortiNDR cloud."
-        },
-        {
-          "title": "Account UUID",
-          "tooltip": "The Account UUID to pull data for.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to retrieve entity passive DNS from FortiNDR cloud."
         },
         {
           "title": "Record Type",
@@ -1084,16 +882,6 @@
           "type": "text",
           "name": "rule_uuid",
           "description": "Specify the UUID of the rule based on which you want to retrieve detections from FortiNDR cloud."
-        },
-        {
-          "title": "Account UUID",
-          "tooltip": "The account to pull detections for.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to retrieve detections from FortiNDR cloud."
         },
         {
           "title": "Sensor ID",
@@ -1350,11 +1138,11 @@
       }
     },
     {
-      "operation": "get_devices",
-      "title": "Get Devices List",
+      "operation": "get_devices_with_detection",
+      "title": "Get Devices with Detection",
       "description": "Retrieves a list of all devices from FortiNDR cloud based on the input parameters you have specified.",
       "category": "investigation",
-      "annotation": "get_devices",
+      "annotation": "get_devices_with_detection",
       "enabled": true,
       "parameters": [
         {
@@ -1433,13 +1221,13 @@
           "type": "select",
           "name": "sort_by",
           "options": [
-            "Device IP",
+            "IP",
             "Detection Count",
             "Last Seen",
             "Threat Score"
           ],
           "value": "Last Seen",
-          "tooltip": "Field to sort by: Device IP, Detection Count, Last Seen, Threat Score. By default, this option is set as Last Seen"
+          "tooltip": "Field to sort by: IP, Detection Count, Last Seen, Threat Score. By default, this option is set as Last Seen"
         },
         {
           "title": "Sort Order",
@@ -1498,11 +1286,11 @@
       }
     },
     {
-      "operation": "get_events",
-      "title": "Get Events List",
-      "description": "Retrieves a list of all events from FortiNDR cloud based on the detection UUID and other input parameters you have specified.",
+      "operation": "get_detection_events",
+      "title": "Get Detection Events",
+      "description": "Retrieves a list of all detection events from FortiNDR cloud based on the detection UUID and other input parameters you have specified.",
       "category": "investigation",
-      "annotation": "get_events",
+      "annotation": "get_detection_events",
       "enabled": true,
       "parameters": [
         {
@@ -1654,11 +1442,11 @@
       }
     },
     {
-      "operation": "get_indicators",
-      "title": "Get Indicators List",
-      "description": "Retrieves a list of all indicators from FortiNDR cloud based on the rule UUID and other input parameters you have specified.",
+      "operation": "get_detection_rule_indicators",
+      "title": "Get Detection Rule Indicators",
+      "description": "Retrieves a list of all detection rule indicators from FortiNDR cloud based on the rule UUID and other input parameters you have specified.",
       "category": "investigation",
-      "annotation": "get_indicators",
+      "annotation": "get_detection_rule_indicators",
       "enabled": true,
       "parameters": [
         {
@@ -1692,10 +1480,9 @@
           "name": "detection_status",
           "options": [
             "Active",
-            "Muted",
             "Resolved"
           ],
-          "tooltip": "Filter by the status of the detection: Active, Muted, Resolved."
+          "tooltip": "Filter by the status of the detection: Active, Resolved."
         },
         {
           "title": "Sort By",
@@ -1771,16 +1558,6 @@
       "annotation": "get_detection_rules",
       "enabled": true,
       "parameters": [
-        {
-          "title": "Account UUID",
-          "tooltip": "Only include rules created by the specified account.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Specify the UUID of the account based on which you want to retrieve detection rules from FortiNDR cloud."
-        },
         {
           "title": "Rule Account UUID",
           "tooltip": "Only include sub-objects for the specified account.",
@@ -2124,16 +1901,6 @@
           "type": "text",
           "name": "rule_uuid",
           "tooltip": "Specify the UUID of the rule based on which you want to retrieve detection rule events from FortiNDR cloud. Note: Get \"Rule UUID\" value from \"Get All Detections List\" operation response."
-        },
-        {
-          "title": "Account UUID",
-          "tooltip": "Only include events for the specified account.",
-          "required": false,
-          "editable": true,
-          "visible": true,
-          "type": "text",
-          "name": "account_uuid",
-          "description": "Only include events for the specified account."
         },
         {
           "title": "Limit",
