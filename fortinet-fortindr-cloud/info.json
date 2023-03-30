@@ -13,12 +13,12 @@
   "ingestion_modes": [
     "scheduled"
   ],
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.0.0/fortinet-fortindr-cloud/545/fortinet-fortindr-cloud-v-1-0-0",
   "configuration": {
     "fields": [
       {
         "title": "API Token",
-        "description": "Specify the API Token used to access the FortiNDR Cloud server to which you will connect and perform the automated operations.",
+        "description": "Specify the API Token used to access the FortiNDR Cloud APIs and perform the automated operations.",
         "type": "password",
         "name": "api_key",
         "required": true,
@@ -27,7 +27,7 @@
       },
       {
         "title": "Account UUID",
-        "description": "Specify the UUID of the account used to access the FortiNDR Cloud server to which you will connect and perform the automated operations.",
+        "description": "Specify the UUID of the account used to access FortiNDR Cloud and perform the automated operations.",
         "required": false,
         "editable": true,
         "visible": true,
@@ -36,7 +36,7 @@
       },
       {
         "title": "Verify SSL",
-        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True.",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not.",
         "name": "verify_ssl",
         "type": "checkbox",
         "required": false,
@@ -50,14 +50,14 @@
     {
       "operation": "get_pcap_tasks",
       "title": "Get PCAP Tasks",
-      "description": "Retrieves a list of all the PCAP tasks or a specific PCAP task from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves a list of all the PCAP tasks or specific PCAP tasks from FortiNDR Cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_pcap_tasks",
       "enabled": true,
       "parameters": [
         {
           "title": "Task UUID",
-          "description": "Specify the UUID of the task based on which you want to retrieve pcap tasks from FortiNDR cloud. Note: If you are specifying Task UUID no need to specify all parameters.",
+          "description": "Specify the UUID of the task based on which you want to retrieve PCAP tasks from FortiNDR Cloud.\nNote: If you specify the Task UUID, then you do not need to specify any other parameters.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -67,7 +67,7 @@
         },
         {
           "title": "Sensor ID",
-          "description": "Specify the sensor ID based on which you want to retrieve pcap tasks from FortiNDR cloud.",
+          "description": "Specify the sensor ID based on which you want to retrieve PCAP tasks from FortiNDR Cloud",
           "required": false,
           "editable": true,
           "visible": true,
@@ -77,7 +77,7 @@
         },
         {
           "title": "Created Start DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.",
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -87,7 +87,7 @@
         },
         {
           "title": "Created End DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -97,7 +97,7 @@
         },
         {
           "title": "Search Text",
-          "description": "Only return tasks with the provided string in their descriptions or names.",
+          "description": "Specify the text based on which you want to search for PCAP tasks from FortiNDR Cloud. In this case, this operation returns only those PCAP tasks that contain the specified string in their descriptions or names.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -107,7 +107,7 @@
         },
         {
           "title": "Include Hash Files",
-          "description": "Indicates to only return tasks with PCAP files. By default, this option is set as true",
+          "description": "Select this checkbox to only return those PCAP tasks that contain Hash files. By default, this option is selected, i.e. set to 'True'.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -118,7 +118,7 @@
         },
         {
           "title": "Page Size",
-          "description": "Specify the maximum count of records that you want this operation to fetch from FortiNDR cloud. By default, this option is set as 100 and maximum we can set as 1000.",
+          "description": "Specify the maximum count of records that you want this operation to fetch from FortiNDR Cloud. By default, this option is set to 100, and you can set a maximum value of 1000.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -129,7 +129,7 @@
         },
         {
           "title": "Page Number",
-          "description": "The page to offset from based on the Page Size. By default, this option is set as 1",
+          "description": "Specify the page from which you want this operation to return results based on the page size. By default, this option is set as '1'. For example, if you set this as '2' and retain the page size as 100, then the operation will return 100 results from the 2nd page.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -200,14 +200,14 @@
     {
       "operation": "download_pcap_task_file",
       "title": "Download PCAP Task File",
-      "description": "Download a specific PCAP task file generated by the specified task from FortiNDR cloud based on the task UUID, and other input parameters you have specified.",
+      "description": "Downloads a specific PCAP task file generated by the specified task from FortiNDR Coud based on the task UUID, and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "download_pcap_task_file",
       "enabled": true,
       "parameters": [
         {
           "title": "Task UUID",
-          "description": "Specify the UUID of the task based on which you want to download pcap task file from FortiNDR cloud.",
+          "description": "Specify the UUID of the task whose associated PCAP task file you want to download from FortiNDR Cloud.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -217,7 +217,7 @@
         },
         {
           "title": "File Name",
-          "description": "Specify the name of the file based on which you want to download pcap task from FortiNDR cloud.",
+          "description": "(Optional) Specify the name of the file that you want to assign to the PCAP task file downloaded from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -231,14 +231,14 @@
     {
       "operation": "terminate_pcap_task",
       "title": "Terminate PCAP Task",
-      "description": "Stops a specific, currently running PCAP task from FortiNDR cloud based on the task UUID that you have specified.",
+      "description": "Stops a specific, currently running, PCAP task on FortiNDR Cloud based on the task UUID that you have specified.",
       "category": "investigation",
       "annotation": "terminate_pcap_task",
       "enabled": true,
       "parameters": [
         {
           "title": "Task UUID",
-          "description": "Specify the UUID of the task based on which you want to stop pcap task from FortiNDR cloud.",
+          "description": "Specify the UUID of the currently running PCAP task that you want to stop on FortiNDR Cloud.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -254,14 +254,14 @@
     {
       "operation": "delete_pcap_task",
       "title": "Delete PCAP Task",
-      "description": "Permanently removes a specific PCAP task and all its associated files from FortiNDR cloud based on the task UUID that you have specified.",
+      "description": "Permanently removes a specific PCAP task and all its associated files from FortiNDR Cloud based on the task UUID that you have specified.",
       "category": "investigation",
       "annotation": "delete_pcap_task",
       "enabled": true,
       "parameters": [
         {
           "title": "Task UUID",
-          "description": "Specify the UUID of the task based on which you want to remove pcap task from FortiNDR cloud.",
+          "description": "Specify the UUID of the PCAP task that you want to remove from FortiNDR Cloud. This operation will delete the specific PCAP task and all its associated files from FortiNDR Cloud.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -277,14 +277,14 @@
     {
       "operation": "get_sensors",
       "title": "Get Sensors List",
-      "description": "Retrieves a list of all sensors or specific sensor from FortiNDR cloud based on the input parameters that you have specified.",
+      "description": "Retrieves a list of all sensors or specific sensors from FortiNDR Cloud based on the input parameters that you have specified.",
       "category": "investigation",
       "annotation": "get_sensors",
       "enabled": true,
       "parameters": [
         {
           "title": "Sensor ID",
-          "description": "Specify the ID of the sensor based on which you want to retrieve sensors from FortiNDR cloud.",
+          "description": "Specify the UUID of the sensor based on which you want to retrieve the specific sensor from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -294,7 +294,7 @@
         },
         {
           "title": "Account Code",
-          "description": "Specify the code of the account based on which you want to retrieve sensors from FortiNDR cloud.",
+          "description": "Specify the code of the account based on which you want to retrieve sensors from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -309,7 +309,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "include",
-          "description": "Include additional metadata into the results. You can choose multiple values: Status or Interfaces",
+          "description": "Choose additional parameters (metadata) that you want to include in the results. You can choose one, more than one, or all of the following values: Status or Interfaces.",
           "options": [
             "Status",
             "Interfaces"
@@ -346,14 +346,14 @@
     {
       "operation": "get_telemetry_events",
       "title": "Get Telemetry Events",
-      "description": "Retrieves details for telemetry events from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves details for all telemetry events or specific telemetry events from FortiNDR Cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_telemetry_events",
       "enabled": true,
       "parameters": [
         {
           "title": "Sensor ID",
-          "description": "Specify the ID of the sensor based on which you want to retrieve events telemetry from FortiNDR cloud.",
+          "description": "Specify the ID of the sensor based on which you want to retrieve telemetry events from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -363,7 +363,7 @@
         },
         {
           "title": "Account Code",
-          "description": "Specify the code of the account based on which you want to retrieve events telemetry from FortiNDR cloud.",
+          "description": "Specify the code of the account based on which you want to retrieve telemetry events from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -373,7 +373,7 @@
         },
         {
           "title": "Interval",
-          "description": "Specify the interval based on which you want to retrieve events telemetry from FortiNDR cloud. Possible values are Hour or Day. By default, this option is set as Hour",
+          "description": "Choose the interval based on which you want to retrieve telemetry events from FortiNDR Cloud. You can choose between Hour (default) or Day.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -388,7 +388,7 @@
         },
         {
           "title": "Start DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp. Note: 1 day for hourly interval, 30 days for daily interval.",
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.\nNote: The default is 1 day ago if you have selected the interval as Hour or 30 days ago if you have selected the interval as Day.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -398,7 +398,7 @@
         },
         {
           "title": "End DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
+          "description": "Select the DateTme using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -408,7 +408,7 @@
         },
         {
           "title": "Event Type",
-          "description": "Specify the type of the event based on which you want to retrieve events telemetry from FortiNDR cloud. Possible values are Flow, DNS, HTTP, SSL, X509, etc.",
+          "description": "Select the type of telemetry events you want to retrieve from FortiNDR Cloud. You can choose from values such as Flow, DNS, HTTP, SSL, X509, etc.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -441,7 +441,7 @@
         },
         {
           "title": "Group By",
-          "description": "Specify the criteria to group the events telemetry from the following available options: Sensor ID or Event Type.",
+          "description": "Select the criteria that you want to use to group telemetry events retrieved from FortiNDR Cloud. You can choose between Sensor ID or Event Type.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -463,14 +463,14 @@
     {
       "operation": "get_telemetry_bandwidth",
       "title": "Get Telemetry Bandwidth",
-      "description": "Retrieves details for telemetry bandwidth from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves details of telemetry bandwidth from FortiNDR Cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_telemetry_bandwidth",
       "enabled": true,
       "parameters": [
         {
           "title": "Account Code",
-          "description": "Specify the code of the account based on which you want to retrieve network telemetry from FortiNDR cloud.",
+          "description": "Specify the code of the account based on which you want to retrieve network telemetry from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -480,7 +480,7 @@
         },
         {
           "title": "Start DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.",
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -490,7 +490,7 @@
         },
         {
           "title": "End DateTime",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created before the specified timestamp.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -500,7 +500,7 @@
         },
         {
           "title": "Interval",
-          "description": "Specify the interval based on which you want to retrieve network telemetry from FortiNDR cloud. Possible values are Day or Month to Day.",
+          "description": "Choose the interval based on which you want to retrieve network telemetry from FortiNDR Cloud. You can choose between Day or Month to Day.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -514,7 +514,7 @@
         },
         {
           "title": "Latest Month",
-          "description": "Filters out the network usage telemetry for all days, except the latest day and month_to_date for each month.",
+          "description": "Specify this parameter if you want to filter out the network usage telemetry for all days, except the latest day and month_to_date for each month.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -524,7 +524,7 @@
         },
         {
           "title": "Sort Order",
-          "description": "Sorting order of the result (devices), choose between Ascending or Descending. By default, this option is set as Descending",
+          "description": "Select the sorting order of the result. You can choose between Ascending or Descending (default).",
           "required": false,
           "editable": true,
           "visible": true,
@@ -539,7 +539,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 1000",
+          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 1000.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -550,7 +550,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0",
           "required": false,
           "editable": true,
           "visible": true,
@@ -580,7 +580,7 @@
     {
       "operation": "get_telemetry_packetstats",
       "title": "Get Telemetry Packetstats",
-      "description": "Retrieves details for telemetry packetstats from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves details for telemetry packetstats from FortiNDR Cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_telemetry_packetstats",
       "enabled": true,
@@ -593,7 +593,7 @@
           "visible": true,
           "type": "text",
           "name": "sensor_id",
-          "description": "Specify the ID of the sensor based on which you want to retrieve events telemetry from FortiNDR cloud."
+          "description": "Specify the ID of the sensor based on which you want to retrieve telemetry packetstats from FortiNDR Cloud."
         },
         {
           "title": "Interval",
@@ -602,7 +602,7 @@
           "visible": true,
           "type": "select",
           "name": "interval",
-          "description": "Specify the interval based on which you want to retrieve events telemetry from FortiNDR cloud. Possible values are Hour or Day. By default, this option is set as Hour",
+          "description": "Choose the interval based on which you want to retrieve telemetry packetstats from FortiNDR Cloud. You can choose between Hour (default) or Day.",
           "options": [
             "Hour",
             "Day"
@@ -618,7 +618,7 @@
           "visible": true,
           "type": "datetime",
           "name": "start_date",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp. Note: 1 day for hourly interval, 30 days for daily interval."
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp.\nNote: The default is 1 day ago if you have selected the interval as 'Hour' or 30 days ago if you have selected the interval as 'Day'."
         },
         {
           "title": "End DateTime",
@@ -628,7 +628,7 @@
           "visible": true,
           "type": "datetime",
           "name": "end_date",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
         },
         {
           "title": "Group By",
@@ -637,7 +637,7 @@
           "visible": true,
           "type": "select",
           "name": "group_by",
-          "description": "Specify the criteria to group the events telemetry from the following available options: Sensor ID.",
+          "description": "Select Sensor ID as the criteria to group telemetry packetstats retrieved from FortiNDR Cloud.",
           "options": [
             "Sensor ID"
           ],
@@ -667,7 +667,7 @@
     {
       "operation": "get_entity_tracking",
       "title": "Get Entity Tracking",
-      "description": "Retrieves a summary information about an IP address, MAC address, or Host name from FortiNDR cloud based on the entity type, entity value, input parameters you have specified.",
+      "description": "Retrieves information about an IP address, MAC address, or Host name from FortiNDR Cloud based on the entity type and value and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_entity_tracking",
       "enabled": true,
@@ -679,7 +679,7 @@
           "visible": true,
           "type": "select",
           "name": "entity_type",
-          "description": "Specify the type of the entity based on which you want to retrieve entity tracking from FortiNDR cloud. Possible values are IP Address, MAC Address or Host Name. By default, this option is set as IP Address",
+          "description": "Select the type of entity whose tracking information you want to retrieve from FortiNDR Cloud. You can choose between IP Address (default), MAC Address, or Host Name.",
           "options": [
             "IP Address",
             "MAC Address",
@@ -696,7 +696,7 @@
           "visible": true,
           "type": "text",
           "name": "entity_value",
-          "description": "Specify the value of the entity based on which you want to retrieve entity tracking from FortiNDR cloud.",
+          "description": "Specify the value of the entity (based on the entity type you have selected) whose tracking information you want to retrieve from FortiNDR Cloud",
           "placeholder": "E.g 1.1.1.1, google.com, etc."
         },
         {
@@ -707,7 +707,7 @@
           "visible": true,
           "type": "datetime",
           "name": "start_time",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
+          "description": "(Optional) Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
         },
         {
           "title": "End DateTime",
@@ -717,11 +717,11 @@
           "visible": true,
           "type": "datetime",
           "name": "end_time",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
+          "description": "(Optional) Select the DateTime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -732,7 +732,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "(Optional) Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -754,7 +754,7 @@
     {
       "operation": "get_entity_summary",
       "title": "Get Entity Summary",
-      "description": "Retrieves a summary information about an IP address or domain from FortiNDR cloud based on the IP/Domain that you have specified.",
+      "description": "Retrieves summary information about an IP address or domain from FortiNDR Cloud based on the IP address or Domain you have specified.",
       "category": "investigation",
       "annotation": "get_entity_summary",
       "enabled": true,
@@ -767,7 +767,7 @@
           "visible": true,
           "type": "text",
           "name": "entity",
-          "description": "Specify the IP/Domain based on which you want to retrieve entity summary from FortiNDR cloud."
+          "description": "Specify the IP address or Domain for which you want to retrieve summary information from FortiNDR Cloud."
         }
       ],
       "output_schema": {
@@ -784,7 +784,7 @@
     {
       "operation": "get_entity_pdns",
       "title": "Get Passive DNS Details",
-      "description": "Retrieves a passive DNS information about an IP address or domain from FortiNDR cloud based on the IP/Domain and other input parameters you have specified.",
+      "description": "Retrieves passive DNS information about an IP address or domain from FortiNDR Cloud based on the IP address or Domain and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_entity_pdns",
       "enabled": true,
@@ -797,7 +797,7 @@
           "visible": true,
           "type": "text",
           "name": "entity",
-          "description": "Specify the IP/Domain based on which you want to retrieve entity passive DNS from FortiNDR cloud."
+          "description": "Specify the IP address Domain based on which you want to retrieve passive DNS details from FortiNDR Cloud."
         },
         {
           "title": "Record Type",
@@ -806,7 +806,7 @@
           "visible": true,
           "type": "select",
           "name": "record_type",
-          "description": "Specify the type of the record based on which you want to retrieve entity passive DNS from FortiNDR cloud. Possible values are A, AAAA, CNAME, MX, or NS",
+          "description": "Select the type of record based on which you want to retrieve entity passive DNS details from FortiNDR Cloud. You can choose from the following options: A, AAAA, CNAME, MX, or NS.",
           "options": [
             "A",
             "AAAA",
@@ -824,7 +824,7 @@
           "visible": true,
           "type": "datetime",
           "name": "start_date",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
+          "description": "(Optional) Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
         },
         {
           "title": "End DateTime",
@@ -834,11 +834,11 @@
           "visible": true,
           "type": "datetime",
           "name": "end_date",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
+          "description": "(Optional) Select the DateTime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 1000",
+          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 1000.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -868,7 +868,7 @@
     {
       "operation": "get_detections",
       "title": "Get Detections List",
-      "description": "Retrieves a list of all detections from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves a list of all detections or specific detections from FortiNDR Cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detections",
       "enabled": true,
@@ -881,7 +881,7 @@
           "visible": true,
           "type": "text",
           "name": "rule_uuid",
-          "description": "Specify the UUID of the rule based on which you want to retrieve detections from FortiNDR cloud."
+          "description": "Specify the UUID of the rule based on which you want to retrieve detections from FortiNDR Cloud."
         },
         {
           "title": "Sensor ID",
@@ -891,7 +891,7 @@
           "visible": true,
           "type": "text",
           "name": "sensor_id",
-          "description": "Specify the ID of the sensor based on which you want to retrieve detections from FortiNDR cloud."
+          "description": "Specify the ID of the sensor based on which you want to retrieve detections from FortiNDR Cloud."
         },
         {
           "title": "Status",
@@ -900,7 +900,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "status",
-          "description": "Specify the status of the detection based on which you want to retrieve detections from FortiNDR cloud. Possible values are Active or Resolved. By default, this option is set as Active",
+          "description": "Select the status of the detection based on which you want to retrieve detections from FortiNDR Cloud. You can choose one, more than one, or all of the following values: Active (default) or Resolved.",
           "options": [
             "Active",
             "Resolved"
@@ -915,7 +915,7 @@
           "visible": true,
           "type": "text",
           "name": "device_ip",
-          "description": "Only include detections with the specified device IP."
+          "description": "Specify the device IP address if you want to include only those detections associated with the specified device IP."
         },
         {
           "title": "Muted",
@@ -924,7 +924,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "muted",
-          "description": "Filter detections by whether or not the detection is muted. By default, this option is set as false",
+          "description": "Select this checkbox if you want this operation to return only those detections that are muted. By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Filter detections by whether or not the detection is muted. By default, this option is set as false"
         },
@@ -935,7 +935,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "muted_device",
-          "description": "Filter detections by whether the device is muted. By default, this option is set as false",
+          "description": "Select this checkbox if you want this operation to return only those detections whose associated devices are muted. By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Filter detections by whether the device is muted. By default, this option is set as false"
         },
@@ -946,7 +946,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "muted_rule",
-          "description": "Filter detections by whether the rule is muted. By default, this option is set as false",
+          "description": "Select this checkbox if you want this operation to return only those detections whose associated rules are muted. By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Filter detections by whether the rule is muted. By default, this option is set as false"
         },
@@ -957,7 +957,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "include",
-          "description": "Include verbose data for linked objects. Possible values are Rules or Indicators.",
+          "description": "Choose to include verbose data for linked objects in the results. You can choose one, or more than one, or all of the following values: Rules or Indicators.",
           "options": [
             "Rules",
             "Indicators"
@@ -971,7 +971,7 @@
           "visible": true,
           "type": "text",
           "name": "indicator_value",
-          "description": "Only include detections with the specified indicator.",
+          "description": "Specify an indicator value if you want to include only those detections associated with the specified indicator.",
           "tooltip": "Only include detections with the specified indicator."
         },
         {
@@ -982,7 +982,7 @@
           "visible": true,
           "type": "datetime",
           "name": "created_start_date",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created after the specified timestamp."
         },
         {
           "title": "Created End DateTime",
@@ -992,11 +992,11 @@
           "visible": true,
           "type": "datetime",
           "name": "created_end_date",
-          "description": "Specify the Datetime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
+          "description": "Select the DateTime using which you want to filter the result set to only include only those items that have been created before the specified timestamp."
         },
         {
           "title": "Sort By",
-          "description": "Name of the field on which you want to sort the result (detections). Possible values are First Seen, Last Seen, Status, Device IP, or Indicator Count. By default, this option is set as First Seen.",
+          "description": "Select the name of the field based on which you want to sort the result (detections) retrieved by this operation. You can choose from the following values: First Seen (default), Last Seen, Status, Device IP, or Indicator Count.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1014,7 +1014,7 @@
         },
         {
           "title": "Sort Order",
-          "description": "Order in which you want to sort the results retrieved from FortiNDR cloud. Possible values are Ascending or Descending. By default, this option is set as Descending",
+          "description": "Select the sorting order of the result. You can choose between Ascending or Descending (default).",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1029,7 +1029,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1040,7 +1040,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1051,47 +1051,93 @@
         }
       ],
       "output_schema": {
-        "result_count": "",
-        "total_count": "",
+        "limit": "",
+        "rules": [
+          {
+            "name": "",
+            "uuid": "",
+            "created": "",
+            "enabled": "",
+            "updated": "",
+            "category": "",
+            "severity": "",
+            "confidence": "",
+            "description": "",
+            "specificity": "",
+            "account_uuid": "",
+            "rule_accounts": [
+              {
+                "muted": "",
+                "last_seen": "",
+                "first_seen": "",
+                "account_uuid": "",
+                "query_filter": "",
+                "muted_comment": "",
+                "detection_count": "",
+                "muted_timestamp": "",
+                "muted_user_uuid": "",
+                "detection_muted_count": "",
+                "detection_resolved_count": ""
+              }
+            ],
+            "source_excludes": [],
+            "critical_updated": "",
+            "query_signature": "",
+            "device_ip_fields": [],
+            "indicator_fields": [],
+            "created_user_uuid": "",
+            "primary_attack_id": "",
+            "run_account_uuids": [],
+            "updated_user_uuid": "",
+            "secondary_attack_id": "",
+            "shared_account_uuids": [],
+            "auto_resolution_minutes": ""
+          }
+        ],
+        "offset": "",
+        "sort_by": "",
         "detections": [
           {
             "uuid": "",
-            "rule_uuid": "",
-            "device_ip": "",
-            "sensor_id": "",
-            "account_uuid": "",
-            "status": "",
-            "muted_device_uuid": "",
-            "muted_rule": "",
             "muted": "",
-            "muted_comment": "",
-            "muted_user_uuid": "",
-            "muted_timestamp": "",
-            "resolution_user_uuid": "",
-            "resolution_timestamp": "",
-            "resolution": "",
-            "resolution_comment": "",
-            "indicators": "",
-            "event_count": "",
-            "username": "",
-            "hostname": "",
-            "first_seen": "",
-            "last_seen": "",
+            "status": "",
             "created": "",
-            "updated": ""
+            "updated": "",
+            "hostname": "",
+            "username": "",
+            "device_ip": "",
+            "last_seen": "",
+            "rule_uuid": "",
+            "sensor_id": "",
+            "first_seen": "",
+            "indicators": [
+              {
+                "field": "",
+                "values": []
+              }
+            ],
+            "muted_rule": "",
+            "resolution": "",
+            "event_count": "",
+            "account_uuid": "",
+            "muted_comment": "",
+            "muted_timestamp": "",
+            "muted_user_uuid": "",
+            "muted_device_uuid": "",
+            "resolution_comment": "",
+            "resolution_timestamp": "",
+            "resolution_user_uuid": ""
           }
         ],
-        "sort_by": "",
         "sort_order": "",
-        "offset": "",
-        "limit": "",
-        "rules": ""
+        "total_count": "",
+        "result_count": ""
       }
     },
     {
       "operation": "resolve_detection",
       "title": "Resolve Detection",
-      "description": "Resolve a details for specific detection from FortiNDR cloud based on the detection UUID, resolution, and other input parameters you have specified.",
+      "description": "Resolves a specific detection on FortiNDR Cloud based on the detection UUID, resolution, and comment (optional) you have specified.",
       "category": "investigation",
       "annotation": "resolve_detection",
       "enabled": true,
@@ -1104,7 +1150,7 @@
           "visible": true,
           "type": "text",
           "name": "detection_uuid",
-          "description": "Specify the UUID of the detection based on which you want to resolve detections in FortiNDR cloud."
+          "description": "Specify the UUID of the detection that you want to resolve in FortiNDR Cloud."
         },
         {
           "title": "Resolution",
@@ -1113,7 +1159,7 @@
           "visible": true,
           "type": "select",
           "name": "resolution",
-          "description": "Specify the resolution of the detection based on which you want to resolve detections in FortiNDR cloud. Possible values are True Positive Mitigated, True Positive No Action, False Positive or Unknown",
+          "description": "Select the resolution that you want to assign to the specified detection you want to resolve in FortiNDR Cloud. You can choose from the following values: True Positive Mitigated, True Positive No Action, False Positive, or Unknown",
           "options": [
             "True Positive Mitigated",
             "True Positive No Action",
@@ -1130,7 +1176,7 @@
           "visible": true,
           "type": "text",
           "name": "resolution_comment",
-          "description": "Specify the comment based on which you want to resolve detections in FortiNDR cloud."
+          "description": "(Optional) Specify a comment that you want to associate with the specified detection you want to resolve in FortiNDR Cloud."
         }
       ],
       "output_schema": {
@@ -1140,14 +1186,14 @@
     {
       "operation": "get_devices_with_detection",
       "title": "Get Devices with Detection",
-      "description": "Retrieves a list of all devices from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves a list of all devices with detection or specific devices with detection from FortiNDR Cloud based on the account UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_devices_with_detection",
       "enabled": true,
       "parameters": [
         {
           "title": "Account UUID",
-          "description": "Specify the UUID of the account based on which you want to retrieve devices from FortiNDR cloud.",
+          "description": "Specify the UUID of the account based on which you want to retrieve devices with detections from FortiNDR Cloud.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -1163,7 +1209,7 @@
           "visible": true,
           "type": "text",
           "name": "search",
-          "description": "Only include detections with the specified device IP."
+          "description": "(Optional) Specify the device IP address if you want to include only those detections associated with the specified device IP."
         },
         {
           "title": "Muted",
@@ -1172,7 +1218,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "muted",
-          "description": "Filter devices by whether or not the devices is muted. By default, this option is set as false",
+          "description": "(Optional) Select this checkbox if you want this operation to return only those devices with detections that are muted. By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Filter associated detections by whether or not the detection is muted. By default, this option is set as false"
         },
@@ -1183,7 +1229,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "muted_device",
-          "description": "Filter detections by whether the device is muted. By default, this option is set as false",
+          "description": "(Optional) Select this checkbox if you want this operation to return only those devices with detections whose associated devices are muted.By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Filter by whether the device is muted. By default, this option is set as false"
         },
@@ -1194,7 +1240,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "muted_rule",
-          "description": "Filter detections by whether the rule is muted. By default, this option is set as false",
+          "description": "(Optional) Select this checkbox if you want this operation to return only those devices with detections whose associated rules are muted.By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Filter associated detections by whether the rule is muted. By default, this option is set as false"
         },
@@ -1205,7 +1251,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "status",
-          "description": "Specify the status of the detection based on which you want to retrieve detections from FortiNDR cloud. Possible values are Active or Resolved. By default, this option is set as Active",
+          "description": "(Optional) Select the status of the detections based on which you want to retrieve devices with detections from FortiNDR Cloud. You can choose one, more than one, or all of the following values: Active (default) or Resolved.",
           "options": [
             "Active",
             "Resolved"
@@ -1214,7 +1260,7 @@
         },
         {
           "title": "Sort By",
-          "description": "Name of the field on which you want to sort the result (devices). Possible values are Device IP, Detection Count, Last Seen or Threat Score. By default, this option is set as Last Seen",
+          "description": "(Optional) Select the name of the field based on which you want to sort the result (devices) retrieved by this operation. You can choose from the following values:Device IP, Detection Count, Last Seen (default), or Threat Score.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1231,7 +1277,7 @@
         },
         {
           "title": "Sort Order",
-          "description": "Sorting order of the result (devices), choose between Ascending or Descending. By default, this option is set as Descending",
+          "description": "(Optional) Select the sorting order of the result. You can choose between Ascending or Descending (default).",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1246,7 +1292,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1257,7 +1303,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "(Optional) Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1288,14 +1334,14 @@
     {
       "operation": "get_detection_events",
       "title": "Get Detection Events",
-      "description": "Retrieves a list of all detection events from FortiNDR cloud based on the detection UUID and other input parameters you have specified.",
+      "description": "Retrieves a list of all detection events or specific detection events from FortiNDR Cloud based on the detection UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detection_events",
       "enabled": true,
       "parameters": [
         {
           "title": "Detection UUID",
-          "description": "Specify the UUID of the detection based on which you want to retrieve events from FortiNDR cloud.",
+          "description": "Specify the UUID of the detection based on which you want to retrieve events from FortiNDR Cloud.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -1305,7 +1351,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1316,7 +1362,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "(Optional) Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1444,14 +1490,14 @@
     {
       "operation": "get_detection_rule_indicators",
       "title": "Get Detection Rule Indicators",
-      "description": "Retrieves a list of all detection rule indicators from FortiNDR cloud based on the rule UUID and other input parameters you have specified.",
+      "description": "Retrieves a list of all detection rule indicators or specific detection rule indicators from FortiNDR Cloud based on the rule UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detection_rule_indicators",
       "enabled": true,
       "parameters": [
         {
           "title": "Rule UUID",
-          "description": "Specify the UUID of the rule based on which you want to retrieve events from FortiNDR cloud.",
+          "description": "Specify the UUID of the rule based on which you want to retrieve indicators from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1461,7 +1507,7 @@
         },
         {
           "title": "Detection Muted",
-          "description": "Filter by whether the detection was muted. By default, this option is set as false",
+          "description": "Select this checkbox if you want this operation to return only those rule indicators whose associated detections are muted. By default, this option is cleared, i.e., set as'false'.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1472,7 +1518,7 @@
         },
         {
           "title": "Detection Status",
-          "description": "Specify the status of the detection based on which you want to retrieve events from FortiNDR cloud. Possible values are Active, Muted, or Resolved. By default, this option is set as Active",
+          "description": "Select the status of the detection based on which you want to retrieve rule indicators from FortiNDR Cloud. You can choose one, more than one, or all of the following values: Active (default) or Resolved.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1486,7 +1532,7 @@
         },
         {
           "title": "Sort By",
-          "description": "Name of the field on which you want to sort the result (indicators). Possible values are count, etc. By default, this option is set as count",
+          "description": "Specify the name of the field based on which you want to sort the result (indicators) retrieved by this operation. By default, the results are sorted by the count field.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1497,7 +1543,7 @@
         },
         {
           "title": "Sort Order",
-          "description": "Sorting order of the result (indicators), choose between Ascending or Descending. By default, this option is set as Descending",
+          "description": "Select the sorting order of the result. You can choose between Ascending or Descending (default)",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1512,7 +1558,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1523,7 +1569,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1553,7 +1599,7 @@
     {
       "operation": "get_detection_rules",
       "title": "Get Detection Rules List",
-      "description": "Retrieves a list of all the detection rules from FortiNDR cloud based on the input parameters you have specified.",
+      "description": "Retrieves a list of all the detection rules or specific detection rules from FortiNDR Cloud based on the input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detection_rules",
       "enabled": true,
@@ -1566,7 +1612,7 @@
           "visible": true,
           "type": "text",
           "name": "rule_account_uuid",
-          "description": "Only include sub-objects for the specified account."
+          "description": "Specify the UUID of the rule account only if you want to include sub-objects for the specified account while retrieving detection rules from FortiNDR Cloud."
         },
         {
           "title": "Search By",
@@ -1576,7 +1622,7 @@
           "visible": true,
           "type": "text",
           "name": "search",
-          "description": "Only include rules with the string in name or category."
+          "description": "Specify the text based on which you want to search for detection rules in FortiNDR Cloud. In this case, this operation returns only those rules that contain the specified string in their name or category."
         },
         {
           "title": "Has Detection",
@@ -1585,7 +1631,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "has_detections",
-          "description": "Only include rules that have unmuted, unresolved detections. By default, this option is set as false",
+          "description": "Select this checkbox to only return those rules that have unmuted or unresolved detections. By default, this option is cleared, i.e., set as 'false'.",
           "value": false,
           "tooltip": "Only include rules that have unmuted, unresolved detections. By default, this option is set as false"
         },
@@ -1597,7 +1643,7 @@
           "visible": true,
           "type": "text",
           "name": "detection_device_ip",
-          "description": "Only include rules with detections for the specified IP; associated detections are determined by the has_detections param."
+          "description": "Specify the device IP address if you want to include only those rules with detections for the specified IP. Associated detections are determined by the has_detections parameter."
         },
         {
           "title": "Indicator Value",
@@ -1607,7 +1653,7 @@
           "visible": true,
           "type": "text",
           "name": "indicator_value",
-          "description": "Case insensitive prefix search of related indicators."
+          "description": "Specify the case-insensitive prefix to be used for searching indicators that are related to the rules you want to retrieve from FortiNDR Cloud."
         },
         {
           "title": "Severity",
@@ -1616,7 +1662,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "severity",
-          "description": "Specify the severity based on which you want to retrieve detection rules from FortiNDR cloud. Possible values are Low, Moderate, or High",
+          "description": "Select the severity based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, more than one, or all of the following values:Low, Moderate, or High.",
           "options": [
             "Low",
             "Moderate",
@@ -1631,7 +1677,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "confidence",
-          "description": "Specify the confidence based on which you want to retrieve detection rules from FortiNDR cloud. Possible values are Low, Moderate, or High",
+          "description": "Select the confidence based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, more than one, or all of the following values:Low, Moderate, or High.",
           "options": [
             "Low",
             "Moderate",
@@ -1646,7 +1692,7 @@
           "visible": true,
           "type": "multiselect",
           "name": "category",
-          "description": "Specify the category based on which you want to retrieve detection rules from FortiNDR cloud. Possible values are Attack:Command and Control, Attack:Exploitation, etc.",
+          "description": "Select the category based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, or more than one, or all of the values such as Attack:Command and Control, Attack:Exploitation, PUA:Adware, etc.",
           "options": [
             "Attack:Command and Control",
             "Attack:Exploitation",
@@ -1675,7 +1721,7 @@
           "visible": true,
           "type": "checkbox",
           "name": "rule_account_muted",
-          "description": "Include rules muted by the specified account."
+          "description": "Select this checkbox if you want this operation to return onlythose rules that are muted by the specified account."
         },
         {
           "title": "Enabled",
@@ -1685,12 +1731,12 @@
           "visible": true,
           "type": "checkbox",
           "name": "enabled",
-          "description": "Only include enabled rules. By default, this option is set as false",
+          "description": "Select this checkbox to only return those rules that are enabled. By default, this option is cleared, i.e., set as 'false'.",
           "value": false
         },
         {
           "title": "Sort By",
-          "description": "Name of the field on which you want to sort the result. Possible values are Created, Updated, Detections, Severity, etc. By default, this option is set as Updated",
+          "description": "Select the name of the field based on which you want to sort the result (rules) retrieved by this operation. You can choose from the following values: Created, Updated (default), Detections, Severity, Confidence, Category, Last Seen, or Detections Muted.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1711,7 +1757,7 @@
         },
         {
           "title": "Sort Order",
-          "description": "Order in which you want to sort the results retrieved from FortiNDR cloud. Possible values are Ascending or Descending. By default, this option is set as Descending",
+          "description": "Select the sorting order of the result. You can choose between Ascending or Descending (default).",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1726,7 +1772,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1737,7 +1783,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1809,14 +1855,14 @@
     {
       "operation": "get_detection_rule_details",
       "title": "Get Detection Rule Details",
-      "description": "Retrieves a specific detection rule information from FortiNDR cloud based on the rule uuid you have specified.",
+      "description": "Retrieves information for a specific detection rule from FortiNDR Cloud based on the rule UUID and rule account UUID (optional) you have specified.",
       "category": "investigation",
       "annotation": "get_detection_rules",
       "enabled": true,
       "parameters": [
         {
           "title": "Rule UUID",
-          "description": "Specify the UUID of the rule based on which you want to retrieve detection rule events from FortiNDR cloud. Note: Get \"Rule UUID\" value from \"Get All Detections List\" operation response.",
+          "description": "Specify the UUID of the rule based on which you want to retrieve the detection rule details from FortiNDR Cloud.\nNote: The response of the \"Get Detection Rules List\" action contains the UUID of a rule.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -1832,7 +1878,7 @@
           "visible": true,
           "type": "text",
           "name": "rule_account_uuid",
-          "description": "Only include sub-objects for the specified account."
+          "description": "(Optional) Specify the UUID of the rule account only if you want to include sub-objects for the specified account while retrieving detection rule details from FortiNDR Cloud."
         }
       ],
       "output_schema": {
@@ -1887,7 +1933,7 @@
     {
       "operation": "get_detection_rule_events",
       "title": "Get Detection Rule Events List",
-      "description": "Retrieves a list of all events for a specific detection rule from FortiNDR cloud based on the rule UUID and other input parameters you have specified.",
+      "description": "Retrieves a list of all events for a specific detection rule from FortiNDR Cloud based on the rule UUID and other input parameters you have specified.",
       "category": "investigation",
       "annotation": "get_detection_rule_events",
       "enabled": true,
@@ -1904,7 +1950,7 @@
         },
         {
           "title": "Limit",
-          "description": "Maximum number of results, per page, that this operation should return. By default, this option is set as 100",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100.",
           "required": false,
           "editable": true,
           "visible": true,
@@ -1915,7 +1961,7 @@
         },
         {
           "title": "Offset",
-          "description": "Skips the specified number of results from the total results. By default, this option is set as 0",
+          "description": "(Optional) Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0.",
           "required": false,
           "editable": true,
           "visible": true,
