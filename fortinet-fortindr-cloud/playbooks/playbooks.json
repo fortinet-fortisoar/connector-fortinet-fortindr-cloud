@@ -3,7 +3,7 @@
   "data": [
     {
       "@type": "WorkflowCollection",
-      "name": "Sample - Fortinet FortiNDR Cloud - 1.0.1",
+      "name": "Sample - Fortinet FortiNDR Cloud - 1.1.0",
       "description": "Sample playbooks for \"Fortinet FortiNDR Cloud\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
       "visible": true,
       "image": null,
@@ -49,7 +49,7 @@
                   "detection_muted": false,
                   "detection_status": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detection_rule_indicators",
                 "operationTitle": "Get Detection Rule Indicators",
@@ -160,7 +160,7 @@
                   "created_end_date": "",
                   "created_start_date": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detections",
                 "operationTitle": "Get Detections List",
@@ -255,7 +255,7 @@
                 "name": "Fortinet FortiNDR Cloud",
                 "config": "",
                 "params": [],
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "resolve_detection",
                 "operationTitle": "Resolve Detection",
@@ -360,7 +360,7 @@
                   "account_code": "",
                   "latest_each_month": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_telemetry_bandwidth",
                 "operationTitle": "Get Telemetry Bandwidth",
@@ -482,7 +482,7 @@
                   "created_end_date": "{{vars.input.params['curr_timestamp']}}",
                   "created_start_date": "{{vars.input.params['last_pull_time']}}"
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detections",
                 "operationTitle": "Get Detections List",
@@ -578,7 +578,7 @@
                 "name": "Fortinet FortiNDR Cloud",
                 "config": "",
                 "params": [],
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_sensors",
                 "operationTitle": "Get Sensors List",
@@ -677,7 +677,7 @@
                   "limit": 100,
                   "offset": 0
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_entity_tracking",
                 "operationTitle": "Get Entity Tracking",
@@ -935,7 +935,7 @@
                   "rule_account_muted": true,
                   "detection_device_ip": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detection_rules",
                 "operationTitle": "Get Detection Rules List",
@@ -1383,7 +1383,7 @@
                   "limit": 100,
                   "offset": 0
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detection_rule_events",
                 "operationTitle": "Get Detection Rule Events List",
@@ -1506,7 +1506,7 @@
                 "name": "Fortinet FortiNDR Cloud",
                 "config": "",
                 "params": [],
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "terminate_pcap_task",
                 "operationTitle": "Terminate PCAP Task",
@@ -1579,7 +1579,7 @@
                   "offset": 0,
                   "detection_uuid": "779b3c11-a3ac-4301-8eb9-ba6f566cde3b"
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detection_events",
                 "operationTitle": "Get Detection Events",
@@ -1695,7 +1695,7 @@
                   "rule_account_muted": true,
                   "detection_device_ip": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detection_rules",
                 "operationTitle": "Get Detection Rules List",
@@ -1802,7 +1802,7 @@
                   "account_uuid": "dc9ab97f-9cdf-46af-8ca2-e71e8e8243c8",
                   "muted_device": false
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_devices_with_detection",
                 "operationTitle": "Get Devices with Detection",
@@ -1901,7 +1901,7 @@
                   "page_size": 100,
                   "has_files_only": true
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_pcap_tasks",
                 "operationTitle": "Get PCAP Tasks",
@@ -2000,7 +2000,7 @@
                   "rule_uuid": "caab7261-ee92-4b78-aa29-4e47e89d72",
                   "rule_account_uuid": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_detection_rule_details",
                 "operationTitle": "Get Detection Rule Details",
@@ -2098,7 +2098,7 @@
                 "params": {
                   "task_uuid": "00c6b7fc-a07e-11ed-8957-02bd6afdaa6d"
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "delete_pcap_task",
                 "operationTitle": "Delete PCAP Task",
@@ -2196,7 +2196,7 @@
                 "params": {
                   "limit": 1000
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_entity_pdns",
                 "operationTitle": "Get Passive DNS Details",
@@ -2300,7 +2300,7 @@
                   "start_date": "",
                   "account_code": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_telemetry_events",
                 "operationTitle": "Get Telemetry Events",
@@ -2398,7 +2398,7 @@
                   "file_name": "",
                   "task_uuid": "373c9861-16cd-44cb-b768-e53ce3a9fc"
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "download_pcap_task_file",
                 "operationTitle": "Download PCAP Task File",
@@ -2494,7 +2494,7 @@
                 "name": "Fortinet FortiNDR Cloud",
                 "config": "",
                 "params": [],
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_entity_summary",
                 "operationTitle": "Get Entity Summary",
@@ -2596,7 +2596,7 @@
                   "sensor_id": "",
                   "start_date": ""
                 },
-                "version": "1.0.1",
+                "version": "1.1.0",
                 "connector": "fortinet-fortindr-cloud",
                 "operation": "get_telemetry_packetstats",
                 "operationTitle": "Get Telemetry Packetstats",
