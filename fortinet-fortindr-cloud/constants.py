@@ -5,10 +5,15 @@ Copyright (c) 2025 Fortinet Inc
 Copyright end
 """
 
-Detection = "https://detections.icebrg.io/v1/"
-Sensors = "https://sensor.icebrg.io/v1/"
-Entity = "https://entity.icebrg.io/v1/entity/"
-Entity_Tracking = "https://entity.icebrg.io/v2/entity/"
+US_Detection = "https://detections.icebrg.io/v1/"
+US_Sensors = "https://sensor.icebrg.io/v1/"
+US_Entity = "https://entity.icebrg.io/v1/entity/"
+US_Entity_Tracking = "https://entity.icebrg.io/v2/entity/"
+
+EU_Detection = "https://detections.eu.fortindr.forticloud.com/v1/"
+EU_Sensors = "https://sensor.eu.fortindr.forticloud.com/v1/"
+EU_Entity = "https://entity.eu.fortindr.forticloud.com/v1/entity/"
+EU_Entity_Tracking = "https://entity.eu.fortindr.forticloud.com/v2/entity/"
 
 SORT_BY = {
     'IP Address': 'ip_address',

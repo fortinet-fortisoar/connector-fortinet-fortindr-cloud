@@ -64,14 +64,47 @@ def build_payload(payload):
     return payload
 
 
+def sensor_cloud_region(config):
+    if config.get('cloud_region') == "US Region":
+        cloud_region = US_Sensors
+    else:
+        cloud_region = EU_Sensors
+    return cloud_region
+
+
+def detection_cloud_region(config):
+    if config.get('cloud_region') == "US Region":
+        cloud_region = US_Detection
+    else:
+        cloud_region = EU_Detection
+    return cloud_region
+
+
+def entity_cloud_region(config):
+    if config.get('cloud_region') == "US Region":
+        cloud_region = US_Entity
+    else:
+        cloud_region = EU_Entity
+    return cloud_region
+
+
+def entity_tracking_cloud_region(config):
+    if config.get('cloud_region') == "US Region":
+        cloud_region = US_Entity_Tracking
+    else:
+        cloud_region = EU_Entity_Tracking
+    return cloud_region
+
+
 def get_pcap_tasks(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.pop('task_uuid', '')
+    cloud_region = sensor_cloud_region(config)
     if task_uuid:
-        endpoint = Sensors + 'pcaptasks/{0}'.format(task_uuid)
+        endpoint = cloud_region + 'pcaptasks/{0}'.format(task_uuid)
         params = {}
     else:
-        endpoint = Sensors + 'pcaptasks'
+        endpoint = cloud_region + 'pcaptasks'
         params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
@@ -80,7 +113,8 @@ def get_pcap_tasks(config, params):
 def download_pcap_task_file(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.pop('task_uuid')
-    endpoint = Sensors + 'pcaptasks/{0}/download/file'.format(task_uuid)
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'pcaptasks/{0}/download/file'.format(task_uuid)
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     try:
@@ -100,7 +134,8 @@ def download_pcap_task_file(config, params):
 def terminate_pcap_task(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.get('task_uuid')
-    endpoint = Sensors + 'pcaptasks/{0}/terminate'.format(task_uuid)
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'pcaptasks/{0}/terminate'.format(task_uuid)
     response = ndr.make_rest_call(endpoint, method='PUT', params={})
     if response.get('message'):
         return response
@@ -111,7 +146,8 @@ def terminate_pcap_task(config, params):
 def delete_pcap_task(config, params):
     ndr = FortiNDR(config)
     task_uuid = params.get('task_uuid')
-    endpoint = Sensors + 'pcaptasks/{0}'.format(task_uuid)
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'pcaptasks/{0}'.format(task_uuid)
     response = ndr.make_rest_call(endpoint, method='DELETE', params={})
     if response.get('message'):
         return response
@@ -121,7 +157,8 @@ def delete_pcap_task(config, params):
 
 def get_sensors(config, params):
     ndr = FortiNDR(config)
-    endpoint = Sensors + 'sensors'
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'sensors'
     include = params.get('include')
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'include': [include[i].lower() for i in range(len(include))] if include else ''})
@@ -132,9 +169,11 @@ def get_sensors(config, params):
 
 def get_devices_with_detection(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'devices'
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'devices'
     status = params.get('status')
-    params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
+    params.update(
+        {'account_uuid': config.get('account_uuid') if config.get('account_uuid') else params.get('account_uuid')})
     params.update({'status': [status[i].lower() for i in range(len(status))] if status else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
@@ -145,7 +184,8 @@ def get_devices_with_detection(config, params):
 
 def get_telemetry_events(config, params):
     ndr = FortiNDR(config)
-    endpoint = Sensors + 'telemetry/events'
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'telemetry/events'
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'interval': params.get('interval').lower() if params.get('interval') else ''})
     params.update({'event_type': EVENT_TYPE.get(params.get('event_type')) if params.get('event_type') else ''})
@@ -157,7 +197,8 @@ def get_telemetry_events(config, params):
 
 def get_telemetry_bandwidth(config, params):
     ndr = FortiNDR(config)
-    endpoint = Sensors + 'telemetry/network_usage'
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'telemetry/network_usage'
     params.update({'interval': Interval.get(params.get('interval')) if params.get('interval') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
     params = build_payload(params)
@@ -167,7 +208,8 @@ def get_telemetry_bandwidth(config, params):
 
 def get_telemetry_packetstats(config, params):
     ndr = FortiNDR(config)
-    endpoint = Sensors + 'telemetry/packetstats'
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'telemetry/packetstats'
     params.update({'interval': params.get('interval').lower() if params.get('interval') else ''})
     params.update({'group_by': GROUP_BY.get(params.get('group_by')) if params.get('group_by') else ''})
     params = build_payload(params)
@@ -178,12 +220,13 @@ def get_telemetry_packetstats(config, params):
 def get_entity_tracking(config, params):
     ndr = FortiNDR(config)
     entity_type, entity_value = params.pop('entity_type'), params.pop('entity_value')
+    cloud_region = entity_tracking_cloud_region(config)
     if entity_type == 'IP Address':
-        endpoint = Entity_Tracking + 'tracking/ip/{0}'.format(entity_value)
+        endpoint = cloud_region + 'tracking/ip/{0}'.format(entity_value)
     elif entity_type == 'MAC Address':
-        endpoint = Entity_Tracking + 'tracking/mac/{0}'.format(entity_value)
+        endpoint = cloud_region + 'tracking/mac/{0}'.format(entity_value)
     else:
-        endpoint = Entity_Tracking + 'tracking/hostname/{0}'.format(entity_value)
+        endpoint = cloud_region + 'tracking/hostname/{0}'.format(entity_value)
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
@@ -192,14 +235,16 @@ def get_entity_tracking(config, params):
 
 def get_entity_summary(config, params):
     ndr = FortiNDR(config)
-    endpoint = Entity + '{0}/summary'.format(params.get('entity'))
+    cloud_region = entity_cloud_region(config)
+    endpoint = cloud_region + '{0}/summary'.format(params.get('entity'))
     response = ndr.make_rest_call(endpoint, params={})
     return response
 
 
 def get_entity_pdns(config, params):
     ndr = FortiNDR(config)
-    endpoint = Entity + '{0}/pdns'.format(params.pop('entity'))
+    cloud_region = entity_cloud_region(config)
+    endpoint = cloud_region + '{0}/pdns'.format(params.pop('entity'))
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
@@ -208,7 +253,8 @@ def get_entity_pdns(config, params):
 
 def get_detection_events(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'events'
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'events'
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
@@ -216,7 +262,8 @@ def get_detection_events(config, params):
 
 def get_detection_rule_indicators(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'indicators/rule_counts'
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'indicators/rule_counts'
     detection_status = params.get('detection_status')
     params.update({'detection_status': [detection_status[i].lower() for i in
                                         range(len(detection_status))] if detection_status else ['active']})
@@ -228,7 +275,8 @@ def get_detection_rule_indicators(config, params):
 
 def get_detections(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'detections'
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'detections'
     status, include = params.get('status'), params.get('include')
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'status': [status[i].lower() for i in range(len(status))] if status else ['active']})
@@ -243,7 +291,8 @@ def get_detections(config, params):
 def resolve_detection(config, params):
     ndr = FortiNDR(config)
     detection_uuid = params.pop('detection_uuid')
-    endpoint = Detection + 'detections/{0}/resolve'.format(detection_uuid)
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'detections/{0}/resolve'.format(detection_uuid)
     params.update({'resolution': Resolution.get(params.get('resolution')) if params.get('resolution') else ''})
     payload = build_payload(params)
     response = ndr.make_rest_call(endpoint, method='PUT', data=json.dumps(payload))
@@ -255,7 +304,8 @@ def resolve_detection(config, params):
 
 def get_detection_rules(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'rules'
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'rules'
     severity, confidence, category = params.get('severity'), params.get('confidence'), params.get('category')
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
@@ -271,7 +321,8 @@ def get_detection_rules(config, params):
 def get_detection_rule_details(config, params):
     ndr = FortiNDR(config)
     rule_uuid = params.pop('rule_uuid')
-    endpoint = Detection + 'rules/{0}'.format(rule_uuid)
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'rules/{0}'.format(rule_uuid)
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
@@ -279,7 +330,8 @@ def get_detection_rule_details(config, params):
 
 def get_detection_rule_events(config, params):
     ndr = FortiNDR(config)
-    endpoint = Detection + 'rules/{0}/events'.format(params.pop('rule_uuid'))
+    cloud_region = detection_cloud_region(config)
+    endpoint = cloud_region + 'rules/{0}/events'.format(params.pop('rule_uuid'))
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
@@ -288,7 +340,8 @@ def get_detection_rule_events(config, params):
 
 def login(config, params):
     ndr = FortiNDR(config)
-    endpoint = Sensors + 'sensors'
+    cloud_region = sensor_cloud_region(config)
+    endpoint = cloud_region + 'sensors'
     headers = {'Content-Type': 'application/json', 'Authorization': 'IBToken ' + ndr.api_key}
     response = requests.request(method='GET', url=endpoint, headers=headers, verify=ndr.verify_ssl)
     if response.ok:

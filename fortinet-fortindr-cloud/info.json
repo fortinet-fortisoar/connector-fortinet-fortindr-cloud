@@ -1,7 +1,7 @@
 {
   "name": "fortinet-fortindr-cloud",
   "label": "Fortinet FortiNDR Cloud",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Fortinet FortiNDR Cloud is a cloud-native network detection and response solution built for the rapid detection of threat activity, investigation of suspicious behavior, proactive hunting for potential risks, and directing a fast and effective response to active threats. This connector facilitates automated operation related to detection, entity, and sensors.",
   "publisher": "Fortinet",
   "cs_approved": true,
@@ -16,6 +16,20 @@
   "help_online": "",
   "configuration": {
     "fields": [
+      {
+        "title": "Cloud Region",
+        "description": "Specify the cloud region used to access the FortiNDR Cloud APIs and perform the automated operations.",
+        "type": "select",
+        "name": "cloud_region",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "options": [
+          "US Region",
+          "EU Region"
+        ],
+        "value": "US Region"
+      },
       {
         "title": "API Token",
         "description": "Specify the API Token used to access the FortiNDR Cloud APIs and perform the automated operations.",
