@@ -1208,12 +1208,12 @@
         {
           "title": "Account UUID",
           "description": "Specify the UUID of the account based on which you want to retrieve devices with detections from FortiNDR Cloud.",
-          "required": true,
+          "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "account_uuid",
-          "tooltip": "The account to pull devices for."
+          "tooltip": "The account to pull devices for. Note: If the Account UUID was not provided during connector configuration, you must specify it in this parameter."
         },
         {
           "title": "Search",
