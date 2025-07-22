@@ -13,12 +13,12 @@
   "ingestion_modes": [
     "scheduled"
   ],
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/fortinet-fortindr-cloud/1752749193/fortinet-fortindr-cloud-v1-1-0",
   "configuration": {
     "fields": [
       {
         "title": "Cloud Region",
-        "description": "Specify the cloud region used to access the FortiNDR Cloud APIs and perform the automated operations.",
+        "description": "Select the cloud region to be used to access the FortiNDR Cloud APIs and perform the automated operations. You can choose either US Region or EU Region. For details, see FortiNDR Cloud API Getting Started Documentation.",
         "type": "select",
         "name": "cloud_region",
         "required": true,
