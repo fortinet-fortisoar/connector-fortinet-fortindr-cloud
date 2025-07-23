@@ -173,7 +173,7 @@ def get_devices_with_detection(config, params):
     endpoint = cloud_region + 'devices'
     status = params.get('status')
     params.update(
-        {'account_uuid': config.get('account_uuid') if config.get('account_uuid') else params.get('account_uuid')})
+        {'account_uuid': params.get('account_uuid') or config.get('account_uuid') or ''})
     params.update({'status': [status[i].lower() for i in range(len(status))] if status else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
