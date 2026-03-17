@@ -1,7 +1,7 @@
 """
 Copyright start
 MIT License
-Copyright (c) 2025 Fortinet Inc
+Copyright (c) 2026 Fortinet Inc
 Copyright end
 """
 
@@ -77,6 +77,22 @@ def detection_cloud_region(config):
         cloud_region = US_Detection
     else:
         cloud_region = EU_Detection
+    return cloud_region
+
+
+def annotation_cloud_region(config):
+    if config.get('cloud_region') == "US Region":
+        cloud_region = US_Annotation
+    else:
+        cloud_region = EU_Annotation
+    return cloud_region
+
+
+def annotation_bulk_cloud_region(config):
+    if config.get('cloud_region') == "US Region":
+        cloud_region = US_Annotation_Bulk
+    else:
+        cloud_region = EU_Annotation_Bulk
     return cloud_region
 
 
@@ -338,6 +354,62 @@ def get_detection_rule_events(config, params):
     return response
 
 
+def add_annotation(config, params):
+    ndr = FortiNDR(config)
+    cloud_region = annotation_cloud_region(config)
+    endpoint = cloud_region
+    data = build_payload(params)
+    response = ndr.make_rest_call(endpoint, method="POST", data=json.dumps(data), params={})
+    return response
+
+
+def retrieve_annotations(config, params):
+    ndr = FortiNDR(config)
+    cloud_region = annotation_cloud_region(config)
+    endpoint = cloud_region
+    params = build_payload(params)
+    response = ndr.make_rest_call(endpoint, params=params)
+    return response
+
+
+def modify_annotation(config, params):
+    ndr = FortiNDR(config)
+    cloud_region = annotation_cloud_region(config)
+    endpoint = cloud_region + '{0}'.format(params.pop('annotation_uuid'))
+    data = build_payload(params.get('annotation'))
+    response = ndr.make_rest_call(endpoint, method="PUT", data=json.dumps(data), params={})
+    return response
+
+
+def delete_annotation(config, params):
+    ndr = FortiNDR(config)
+    cloud_region = annotation_cloud_region(config)
+    endpoint = cloud_region + '{0}'.format(params.get('annotation_uuid'))
+    response = ndr.make_rest_call(endpoint, method="DELETE", params={})
+    if response:
+        return {"result": "Successfully deleted the annotation: {0}".format(params.get('annotation_uuid'))}
+
+
+def retrieve_annotation_for_entities(config, params):
+    ndr = FortiNDR(config)
+    cloud_region = annotation_bulk_cloud_region(config)
+    endpoint = cloud_region + 'annotation_by_entity'
+    data = build_payload(params)
+    response = ndr.make_rest_call(endpoint, method="POST", data=json.dumps(data), params={})
+    return response
+
+
+def add_or_replace_entities_to_annotation(config, params):
+    ndr = FortiNDR(config)
+    cloud_region = annotation_cloud_region(config)
+    endpoint = cloud_region + '{0}/entity'.format(params.pop('annotation_uuid'))
+    data = {
+        "entities": params.pop('entities')
+    }
+    response = ndr.make_rest_call(endpoint, method="POST", data=json.dumps(data), params=params)
+    return response
+
+
 def login(config, params):
     ndr = FortiNDR(config)
     cloud_region = sensor_cloud_region(config)
@@ -378,5 +450,11 @@ operations = {
     'resolve_detection': resolve_detection,
     'get_detection_rules': get_detection_rules,
     'get_detection_rule_details': get_detection_rule_details,
-    'get_detection_rule_events': get_detection_rule_events
+    'get_detection_rule_events': get_detection_rule_events,
+    'add_annotation': add_annotation,
+    'retrieve_annotations': retrieve_annotations,
+    'modify_annotation': modify_annotation,
+    'delete_annotation': delete_annotation,
+    'retrieve_annotation_for_entities': retrieve_annotation_for_entities,
+    'add_or_replace_entities_to_annotation': add_or_replace_entities_to_annotation
 }

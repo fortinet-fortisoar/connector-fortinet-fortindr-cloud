@@ -1,4 +1,9 @@
-#### The following enhancements have been made to the Fortinet FortiNDR Cloud connector in version 1.1.0:
+#### The following enhancements have been made to the Fortinet FortiNDR Cloud connector in version 1.2.0:
 
-- Fixed an issue with data ingestion caused by an invalid datetime format in the last_pull_time field.
-- Added a new configuration parameter named `Cloud Region`.
+- Added the following new actions:
+    - Add Annotation
+    - Retrieve Annotations
+    - Modify Annotation
+    - Delete Annotation
+    - Retrieve Annotation for Entities
+    - Add or Replace Entities to Annotation
