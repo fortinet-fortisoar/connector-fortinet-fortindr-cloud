@@ -1,7 +1,7 @@
 {
   "name": "fortinet-fortindr-cloud",
   "label": "Fortinet FortiNDR Cloud",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Fortinet FortiNDR Cloud is a cloud-native network detection and response solution built for the rapid detection of threat activity, investigation of suspicious behavior, proactive hunting for potential risks, and directing a fast and effective response to active threats. This connector facilitates automated operation related to detection, entity, and sensors.",
   "publisher": "Fortinet",
   "cs_approved": true,
@@ -13,7 +13,7 @@
   "ingestion_modes": [
     "scheduled"
   ],
-  "help_online": "https://docs.fortinet.com/document/fortisoar/1.1.0/fortinet-fortindr-cloud/1752749193/fortinet-fortindr-cloud-v1-1-0",
+  "help_online": "",
   "configuration": {
     "fields": [
       {
@@ -2027,6 +2027,340 @@
             "observation_title": "",
             "observation_uuid": "",
             "sensor_ids": []
+          }
+        ]
+      }
+    },
+    {
+      "operation": "add_annotation",
+      "title": "Add Annotation",
+      "description": "Adds new annotation(s) in FortiNDR Cloud based on the account uuid and annotations that you have specified.",
+      "category": "investigation",
+      "annotation": "add_annotation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Annotations",
+          "description": "Specify annotations to create. Supported name values: application, environment, location, owner, role, tag. For tags, use \"name\": \"tag\" with a single value in \"values\" (e.g., \"values\": [\"my tag\"]). The description field is optional. An error occurs if an annotation with the same name and identical values already exists.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "annotations",
+          "tooltip": "Specify annotations to create. Supported name values: application, environment, location, owner, role, tag. For tags, use \"name\": \"tag\" with a single value in \"values\" (e.g., \"values\": [\"my tag\"]). The description field is optional. An error occurs if an annotation with the same name and identical values already exists.",
+          "value": [
+            {
+              "description": "My Annotation",
+              "name": "location",
+              "value": "HQ"
+            }
+          ]
+        },
+        {
+          "title": "Account UUID",
+          "description": "Specify the UUID of the account based on which you want to add annotations from FortiNDR Cloud.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "account_uuid",
+          "tooltip": "Specify the UUID of the account based on which you want to add annotations from FortiNDR Cloud. Note: If the Account UUID was not provided during connector configuration, you must specify it in this parameter."
+        }
+      ],
+      "output_schema": {
+        "annotation_details": [
+          {
+            "annotation_uuid": "",
+            "account_code": "",
+            "description": "",
+            "annotation": {
+              "name": "",
+              "values": []
+            },
+            "created_user_uuid": "",
+            "created": "",
+            "updated": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "retrieve_annotations",
+      "title": "Retrieve Annotations",
+      "description": "Retrieve a list of annotations based on the filter parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "retrieve_annotations",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Account UUID",
+          "description": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "account_uuid",
+          "tooltip": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud."
+        },
+        {
+          "title": "Annotation Value",
+          "description": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "value",
+          "tooltip": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud."
+        },
+        {
+          "title": "Entity",
+          "tooltip": "Specify the name of the entity used to filter annotations. If specified, all annotations associated with this entity will be retrieved. Note: 'Entity Type' must also be provided.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "entity",
+          "description": "Specify the name of the entity used to filter annotations. If specified, all annotations associated with this entity will be retrieved. Note: 'Entity Type' must also be provided.",
+          "placeholder": "E.g 1.1.1.1, google.com, etc."
+        },
+        {
+          "title": "Entity Type",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "entity_type",
+          "description": "Select the type of entity whose annotation information you want to retrieve from FortiNDR Cloud.",
+          "tooltip": "Select the type of entity whose annotation information you want to retrieve from FortiNDR Cloud."
+        },
+        {
+          "title": "Limit",
+          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100 and maximum is 1000.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "value": 100,
+          "tooltip": "The maximum number of records to return. By default, this option is set as 100 and maximum is 1000"
+        },
+        {
+          "title": "Offset",
+          "description": "Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "offset",
+          "value": 0,
+          "tooltip": "The number of records to skip past. By default, this option is set as 0"
+        }
+      ],
+      "output_schema": {
+        "total": "",
+        "limit": "",
+        "offset": "",
+        "annotation_details": [
+          {
+            "annotation_uuid": "",
+            "account_code": "",
+            "description": "",
+            "annotation": {
+              "name": "",
+              "values": []
+            },
+            "created_user_uuid": "",
+            "created": "",
+            "updated": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "modify_annotation",
+      "title": "Modify Annotation",
+      "description": "Modify a existing annotation in FortiNDR Cloud based on the annotation uuid and annotation that you have specified.",
+      "category": "investigation",
+      "annotation": "modify_annotation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Annotation UUID",
+          "description": "Specify the UUID of the annotation based on which you want to modify annotation in FortiNDR Cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "annotation_uuid",
+          "tooltip": "Specify the UUID of the annotation based on which you want to modify annotation in FortiNDR Cloud."
+        },
+        {
+          "title": "Annotation",
+          "description": "Specify annotation to modify. Note: Any pre-existing values will be deleted. The values provided on the request will be the new set of values.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "annotation",
+          "tooltip": "Specify annotation to modify. Note: Any pre-existing values will be deleted. The values provided on the request will be the new set of values.",
+          "value": {
+            "description": "My Annotation",
+            "value": "HQ"
+          }
+        }
+      ],
+      "output_schema": {
+        "annotation_details": [
+          {
+            "annotation_uuid": "",
+            "account_code": "",
+            "description": "",
+            "annotation": {
+              "name": "",
+              "values": []
+            },
+            "created_user_uuid": "",
+            "created": "",
+            "updated": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "delete_annotation",
+      "title": "Delete Annotation",
+      "description": "Deletes a existing annotation in FortiNDR Cloud based on the annotation uuid you have specified.",
+      "category": "investigation",
+      "annotation": "delete_annotation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Annotation UUID",
+          "description": "Specify the UUID of the annotation which you want to delete from FortiNDR Cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "annotation_uuid",
+          "tooltip": "Specify the UUID of the annotation which you want to delete from FortiNDR Cloud."
+        }
+      ],
+      "output_schema": {
+        "result": ""
+      }
+    },
+    {
+      "operation": "retrieve_annotation_for_entities",
+      "title": "Retrieve Annotation for Entities",
+      "description": "Retrieve annotations for a given list of entities from FortiNDR Cloud based on the entities that you have specified.",
+      "category": "investigation",
+      "annotation": "retrieve_annotation_for_entities",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Entities",
+          "tooltip": "Specify the entities based on which you want to retrieve annotation.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "entities",
+          "description": "Specify the entities based on which you want to retrieve annotation.",
+          "value": [
+            {
+              "entity": "10.0.0.1",
+              "entity_type": "ip"
+            }
+          ]
+        },
+        {
+          "title": "Account UUID",
+          "description": "Specify the UUID of the account based on which you want to retrieve annotation for entities from FortiNDR Cloud.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "account_uuid",
+          "tooltip": "Specify the UUID of the account based on which you want to annotation for entities from FortiNDR Cloud."
+        }
+      ],
+      "output_schema": {
+        "entity_annotations": [
+          {
+            "account_code": "",
+            "entity": {
+              "entity": "",
+              "entity_type": ""
+            },
+            "annotations": [
+              {
+                "annotation_uuid": "",
+                "account_code": "",
+                "description": "",
+                "created_user_uuid": "",
+                "created": "",
+                "updated": "",
+                "annotation": {
+                  "name": "",
+                  "values": []
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "operation": "add_or_replace_entities_to_annotation",
+      "title": "Add or Replace Entities to Annotation",
+      "description": "Adds new entities or replace the existent entities to an annotation in FortiNDR Cloud based on the entities and replace parameters that you have specified.",
+      "category": "investigation",
+      "annotation": "add_or_replace_entities_to_annotation",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Annotation UUID",
+          "description": "Specify the UUID of the annotation based on which you want to add/replace entities to annotation in FortiNDR Cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "annotation_uuid",
+          "tooltip": "Specify the UUID of the annotation based on which you want to add/replace entities to annotation in FortiNDR Cloud."
+        },
+        {
+          "title": "Entities",
+          "tooltip": "Specify the entities based on which you want to add/replace entities to annotation in FortiNDR Cloud.",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "entities",
+          "description": "Specify the entities based on which you want to add/replace entities to annotation in FortiNDR Cloud.",
+          "value": [
+            {
+              "entity": "10.0.0.1",
+              "entity_type": "ip"
+            }
+          ]
+        },
+        {
+          "title": "Replace",
+          "description": "If true, the provided entities will replace any existent entity; otherwise, they will be added. By default this parameter is set to false.",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "replace",
+          "tooltip": "If true, the provided entities will replace any existent entity; otherwise, they will be added. By default this parameter is set to false.",
+          "value": false
+        }
+      ],
+      "output_schema": {
+        "entities": [
+          {
+            "entity": "",
+            "entity_type": ""
           }
         ]
       }

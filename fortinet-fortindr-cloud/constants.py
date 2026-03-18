@@ -1,7 +1,7 @@
 """
 Copyright start
 MIT License
-Copyright (c) 2025 Fortinet Inc
+Copyright (c) 2026 Fortinet Inc
 Copyright end
 """
 
@@ -9,11 +9,15 @@ US_Detection = "https://detections.icebrg.io/v1/"
 US_Sensors = "https://sensor.icebrg.io/v1/"
 US_Entity = "https://entity.icebrg.io/v1/entity/"
 US_Entity_Tracking = "https://entity.icebrg.io/v2/entity/"
+US_Annotation = "https://entity.icebrg.io/v2/annotation/"
+US_Annotation_Bulk = "https://entity.icebrg.io/v2/annotation_bulk/"
 
 EU_Detection = "https://detections.eu.fortindr.forticloud.com/v1/"
 EU_Sensors = "https://sensor.eu.fortindr.forticloud.com/v1/"
 EU_Entity = "https://entity.eu.fortindr.forticloud.com/v1/entity/"
 EU_Entity_Tracking = "https://entity.eu.fortindr.forticloud.com/v2/entity/"
+EU_Annotation = "https://entity.eu.fortindr.forticloud.com/v2/annotation/"
+EU_Annotation_Bulk = "https://entity.eu.fortindr.forticloud.com/v2/annotation_bulk/"
 
 SORT_BY = {
     'IP Address': 'ip_address',
