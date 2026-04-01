@@ -7,3 +7,4 @@
     - Delete Annotation
     - Retrieve Annotation for Entities
     - Add or Replace Entities to Annotation
+    - Execute an API Request

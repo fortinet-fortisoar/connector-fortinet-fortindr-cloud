@@ -2104,13 +2104,13 @@
         },
         {
           "title": "Annotation Value",
-          "description": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud.",
+          "description": "Specify the value of the annotation those details you want to retrieve from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "value",
-          "tooltip": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud."
+          "tooltip": "Specify the value of the annotation those details you want to retrieve from FortiNDR Cloud."
         },
         {
           "title": "Entity",
@@ -2364,6 +2364,62 @@
           }
         ]
       }
+    },
+    {
+      "operation": "execute_an_api_call",
+      "title": "Execute an API Request",
+      "annotation": "execute_an_api_call",
+      "description": "Sends an API request to an API endpoint based on specified HTTP method, endpoint, and other input parameters that you have specified, enabling flexible API interactions tailored to user needs.",
+      "category": "investigation",
+      "visible": true,
+      "enabled": true,
+      "parameters": [
+        {
+          "name": "method",
+          "title": "HTTP Method",
+          "type": "select",
+          "editable": true,
+          "visible": true,
+          "required": true,
+          "description": "Select an HTTP action for the request. You can select from the following options:  \n\nDELETE \n\nGET \n\nPATCH \n\nPOST \n\nPUT ",
+          "options": [
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE"
+          ]
+        },
+        {
+          "title": "Endpoint",
+          "name": "endpoint",
+          "tooltip": "Specify the target API URL path for example: https://sensor.icebrg.io/v1/sensors or https://sensor.eu.fortindr.forticloud.com/v1/sensors",
+          "description": "Specify the target API URL path for the request. For example, if the website is https://example.com and URL path is https://example.com/images/pic.jpg, the endpoint would be https://example.com/images/pic.jpg.",
+          "type": "text",
+          "visible": true,
+          "editable": true,
+          "required": true
+        },
+        {
+          "title": "Query Parameters",
+          "name": "query_params",
+          "description": "(Optional) Specify any optional parameters to add to the URL and refine the request.",
+          "type": "json",
+          "visible": true,
+          "editable": true,
+          "required": false
+        },
+        {
+          "name": "payload",
+          "title": "Request Payload",
+          "type": "json",
+          "editable": true,
+          "visible": true,
+          "required": false,
+          "description": "(Optional) Specify data, as JSON, to be sent as the request payload (typically for POST or PUT requests)."
+        }
+      ],
+      "output_schema": {}
     }
   ]
 }
