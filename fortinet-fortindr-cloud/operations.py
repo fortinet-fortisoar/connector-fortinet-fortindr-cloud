@@ -358,6 +358,8 @@ def add_annotation(config, params):
     ndr = FortiNDR(config)
     cloud_region = annotation_cloud_region(config)
     endpoint = cloud_region
+    params.update(
+        {'account_uuid': params.get('account_uuid') or config.get('account_uuid') or ''})
     data = build_payload(params)
     response = ndr.make_rest_call(endpoint, method="POST", data=json.dumps(data), params={})
     return response
@@ -387,6 +389,8 @@ def delete_annotation(config, params):
     endpoint = cloud_region + '{0}'.format(params.get('annotation_uuid'))
     response = ndr.make_rest_call(endpoint, method="DELETE", params={})
     if response:
+        return {"result": "Annotation not found"}
+    else:
         return {"result": "Successfully deleted the annotation: {0}".format(params.get('annotation_uuid'))}
 
 
@@ -409,6 +413,21 @@ def add_or_replace_entities_to_annotation(config, params):
     response = ndr.make_rest_call(endpoint, method="POST", data=json.dumps(data), params=params)
     return response
 
+def execute_an_api_call(config, params):
+    try:
+        ndr = FortiNDR(config)
+        endpoint = params.get("endpoint")
+        headers = {'Content-Type': 'application/json', 'Authorization': 'IBToken ' + ndr.api_key}
+        http_method = params.get("method")
+        query_params = params.get("query_params") if params.get("query_params") else {}
+        payload = params.get("payload") if params.get("payload") else {}
+        logger.debug("Payload: {0}".format(payload))
+        response = requests.request(method=http_method, url=endpoint, headers=headers, data=payload, params=query_params, verify=ndr.verify_ssl)
+        if response.ok:
+            return response.json()
+    except Exception as err:
+        logger.exception("{0}".format(str(err)))
+        raise ConnectorError("{0}".format(str(err)))
 
 def login(config, params):
     ndr = FortiNDR(config)
@@ -424,9 +443,12 @@ def login(config, params):
 
 def _check_health(config):
     try:
-        response = login(config, params={})
-        if response:
+        response = get_sensors(config, params={'account_uuid': config.get('account_uuid')}) if config.get(
+            'account_uuid') else login(config, params={})
+        if response and response.get("sensors") is not None:
             return True
+        else:
+            raise ConnectorError('Invalid Account UUID')
     except Exception as err:
         raise ConnectorError("{0}".format(str(err)))
 
@@ -456,5 +478,6 @@ operations = {
     'modify_annotation': modify_annotation,
     'delete_annotation': delete_annotation,
     'retrieve_annotation_for_entities': retrieve_annotation_for_entities,
-    'add_or_replace_entities_to_annotation': add_or_replace_entities_to_annotation
+    'add_or_replace_entities_to_annotation': add_or_replace_entities_to_annotation,
+    'execute_an_api_call': execute_an_api_call
 }
