@@ -1674,7 +1674,7 @@
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "multiselect",
+          "type": "select",
           "name": "severity",
           "description": "Select the severity based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, more than one, or all of the following values:Low, Moderate, or High.",
           "options": [
@@ -1689,7 +1689,7 @@
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "multiselect",
+          "type": "select",
           "name": "confidence",
           "description": "Select the confidence based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, more than one, or all of the following values:Low, Moderate, or High.",
           "options": [
@@ -1704,7 +1704,7 @@
           "required": false,
           "editable": true,
           "visible": true,
-          "type": "multiselect",
+          "type": "select",
           "name": "category",
           "description": "Select the category based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, or more than one, or all of the values such as Attack:Command and Control, Attack:Exploitation, PUA:Adware, etc.",
           "options": [
