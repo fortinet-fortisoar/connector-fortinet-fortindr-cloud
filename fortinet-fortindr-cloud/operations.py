@@ -326,9 +326,9 @@ def get_detection_rules(config, params):
     params.update({'account_uuid': config.get('account_uuid') if config.get('account_uuid') else ''})
     params.update({'sort_by': SORT_BY.get(params.get('sort_by')) if params.get('sort_by') else ''})
     params.update({'sort_order': SORT_ORDER.get(params.get('sort_order')) if params.get('sort_order') else ''})
-    params.update({'severity': [severity[i].lower() for i in range(len(severity))] if severity else ''})
-    params.update({'confidence': [confidence[i].lower() for i in range(len(confidence))] if confidence else ''})
-    params.update({'category': [category[i].lower() for i in range(len(category))] if category else ''})
+    params.update({'severity': severity.lower() if severity else ''})
+    params.update({'confidence': confidence.lower() if confidence else ''})
+    params.update({'category': category if category else ''})
     params = build_payload(params)
     response = ndr.make_rest_call(endpoint, params=params)
     return response
@@ -413,6 +413,7 @@ def add_or_replace_entities_to_annotation(config, params):
     response = ndr.make_rest_call(endpoint, method="POST", data=json.dumps(data), params=params)
     return response
 
+
 def execute_an_api_call(config, params):
     try:
         ndr = FortiNDR(config)
@@ -422,12 +423,14 @@ def execute_an_api_call(config, params):
         query_params = params.get("query_params") if params.get("query_params") else {}
         payload = params.get("payload") if params.get("payload") else {}
         logger.debug("Payload: {0}".format(payload))
-        response = requests.request(method=http_method, url=endpoint, headers=headers, data=payload, params=query_params, verify=ndr.verify_ssl)
+        response = requests.request(method=http_method, url=endpoint, headers=headers, data=payload,
+                                    params=query_params, verify=ndr.verify_ssl)
         if response.ok:
             return response.json()
     except Exception as err:
         logger.exception("{0}".format(str(err)))
         raise ConnectorError("{0}".format(str(err)))
+
 
 def login(config, params):
     ndr = FortiNDR(config)
