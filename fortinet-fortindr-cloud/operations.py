@@ -421,12 +421,14 @@ def execute_an_api_call(config, params):
         headers = {'Content-Type': 'application/json', 'Authorization': 'IBToken ' + ndr.api_key}
         http_method = params.get("method")
         query_params = params.get("query_params") if params.get("query_params") else {}
-        payload = params.get("payload") if params.get("payload") else {}
+        payload = json.dumps(params.get("payload")) if params.get("payload") else {}
         logger.debug("Payload: {0}".format(payload))
-        response = requests.request(method=http_method, url=endpoint, headers=headers, data=payload,
-                                    params=query_params, verify=ndr.verify_ssl)
-        if response.ok:
-            return response.json()
+        response = requests.request(method=http_method, url=endpoint, headers=headers, data=payload, params=query_params, verify=ndr.verify_ssl)
+        if response.ok or response.status_code == 204:
+            if 'json' in str(response.headers):
+                return response.json()
+            else:
+                return dict()
     except Exception as err:
         logger.exception("{0}".format(str(err)))
         raise ConnectorError("{0}".format(str(err)))

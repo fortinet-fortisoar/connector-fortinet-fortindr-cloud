@@ -13,7 +13,7 @@
   "ingestion_modes": [
     "scheduled"
   ],
-  "help_online": "",
+  "help_online": "https://docs.fortinet.com/document/fortisoar/1.2.0/fortinet-fortindr-cloud/120/fortinet-fortindr-cloud-v1-2-0",
   "configuration": {
     "fields": [
       {
@@ -1676,13 +1676,13 @@
           "visible": true,
           "type": "select",
           "name": "severity",
-          "description": "Select the severity based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, more than one, or all of the following values:Low, Moderate, or High.",
+          "description": "Select the severity based on which you want to retrieve detection rules from Severity FortiNDR Cloud. You can choose one of the following values: Low, Moderate, or High.",
           "options": [
             "Low",
             "Moderate",
             "High"
           ],
-          "tooltip": "List of severities to filter by: Low, Moderate, High."
+          "tooltip": "Select the severity based on which you want to retrieve detection rules from Severity FortiNDR Cloud. You can choose one of the following values: Low, Moderate, or High."
         },
         {
           "title": "Confidence",
@@ -1691,13 +1691,13 @@
           "visible": true,
           "type": "select",
           "name": "confidence",
-          "description": "Select the confidence based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, more than one, or all of the following values:Low, Moderate, or High.",
+          "description": "Select the confidence based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one of the following values:Low, Moderate, or High.",
           "options": [
             "Low",
             "Moderate",
             "High"
           ],
-          "tooltip": "List of confidences to filter by: Low, Moderate, High."
+          "tooltip": "Select the confidence based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one of the following values:Low, Moderate, or High."
         },
         {
           "title": "Category",
@@ -1706,7 +1706,7 @@
           "visible": true,
           "type": "select",
           "name": "category",
-          "description": "Select the category based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one, or more than one, or all of the values such as Attack:Command and Control, Attack:Exploitation, PUA:Adware, etc.",
+          "description": "Select the category based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one of the values such as Attack:Command and Control, Attack:Exploitation, PUA:Adware, etc.",
           "options": [
             "Attack:Command and Control",
             "Attack:Exploitation",
@@ -1725,7 +1725,7 @@
             "PUA:Unauthorized Resource Use",
             "PUA:Miscellaneous"
           ],
-          "tooltip": "Category to filter by."
+          "tooltip": "Select the category based on which you want to retrieve detection rules from FortiNDR Cloud. You can choose one of the values such as Attack:Command and Control, Attack:Exploitation, PUA:Adware, etc."
         },
         {
           "title": "Include Muted Rules",
@@ -2041,13 +2041,13 @@
       "parameters": [
         {
           "title": "Annotations",
-          "description": "Specify annotations to create. Supported name values: application, environment, location, owner, role, tag. For tags, use \"name\": \"tag\" with a single value in \"values\" (e.g., \"values\": [\"my tag\"]). The description field is optional. An error occurs if an annotation with the same name and identical values already exists.",
+          "description": "Specify the type of annotations to mark the entities. Supported name values are: application, environment, location, owner, role, tag. For tags, use\n\"name\": \"tag\" with a single value in \"values\". For example: \"values\":\n[\"my tag\"]. The description field is optional. An error occurs if another annotation with the same name and identical values already exists.",
           "required": true,
           "editable": true,
           "visible": true,
           "type": "json",
           "name": "annotations",
-          "tooltip": "Specify annotations to create. Supported name values: application, environment, location, owner, role, tag. For tags, use \"name\": \"tag\" with a single value in \"values\" (e.g., \"values\": [\"my tag\"]). The description field is optional. An error occurs if an annotation with the same name and identical values already exists.",
+          "tooltip": "Specify the type of annotations to mark the entities. Supported name values are: application, environment, location, owner, role, tag. For tags, use\n\"name\": \"tag\" with a single value in \"values\". For example: \"values\":\n[\"my tag\"]. The description field is optional. An error occurs if another annotation with the same name and identical values already exists.",
           "value": [
             {
               "description": "My Annotation",
@@ -2058,13 +2058,13 @@
         },
         {
           "title": "Account UUID",
-          "description": "Specify the UUID of the account based on which you want to add annotations from FortiNDR Cloud.",
+          "description": "(Optional) Specify the UUID of the account based on which you want to add annotations from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "account_uuid",
-          "tooltip": "Specify the UUID of the account based on which you want to add annotations from FortiNDR Cloud. Note: If the Account UUID was not provided during connector configuration, you must specify it in this parameter."
+          "tooltip": "(Optional) Specify the UUID of the account based on which you want to add annotations from FortiNDR Cloud. Note: If the Account UUID was not provided during connector configuration, you must specify it in this parameter."
         }
       ],
       "output_schema": {
@@ -2094,33 +2094,33 @@
       "parameters": [
         {
           "title": "Account UUID",
-          "description": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud.",
+          "description": "(Optional) Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "account_uuid",
-          "tooltip": "Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud."
+          "tooltip": "(Optional) Specify the UUID of the account based on which you want to retrieve annotations from FortiNDR Cloud."
         },
         {
           "title": "Annotation Value",
-          "description": "Specify the value of the annotation those details you want to retrieve from FortiNDR Cloud.",
+          "description": "(Optional) Specify the value of the annotation those details you want to retrieve from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "value",
-          "tooltip": "Specify the value of the annotation those details you want to retrieve from FortiNDR Cloud."
+          "tooltip": "(Optional) Specify the value of the annotation those details you want to retrieve from FortiNDR Cloud."
         },
         {
           "title": "Entity",
-          "tooltip": "Specify the name of the entity used to filter annotations. If specified, all annotations associated with this entity will be retrieved. Note: 'Entity Type' must also be provided.",
+          "tooltip": "(Optional) Specify the name of the entity used to filter annotations. If specified, all annotations associated with this entity will be retrieved.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "entity",
-          "description": "Specify the name of the entity used to filter annotations. If specified, all annotations associated with this entity will be retrieved. Note: 'Entity Type' must also be provided.",
+          "description": "(Optional) Specify the name of the entity used to filter annotations. If specified, all annotations associated with this entity will be retrieved. Note: 'Entity Type' must also be provided.",
           "placeholder": "E.g 1.1.1.1, google.com, etc."
         },
         {
@@ -2130,30 +2130,30 @@
           "visible": true,
           "type": "text",
           "name": "entity_type",
-          "description": "Select the type of entity whose annotation information you want to retrieve from FortiNDR Cloud.",
-          "tooltip": "Select the type of entity whose annotation information you want to retrieve from FortiNDR Cloud."
+          "description": "(Optional) Select the type of entity whose annotation information you want to retrieve from FortiNDR Cloud.",
+          "tooltip": "(Optional) Select the type of entity whose annotation information you want to retrieve from FortiNDR Cloud."
         },
         {
           "title": "Limit",
-          "description": "Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100 and maximum is 1000.",
+          "description": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100 and maximum is 1000.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "integer",
           "name": "limit",
           "value": 100,
-          "tooltip": "The maximum number of records to return. By default, this option is set as 100 and maximum is 1000"
+          "tooltip": "(Optional) Specify the maximum number of results, per page, that this operation should return. By default, this option is set as 100 and maximum is 1000."
         },
         {
           "title": "Offset",
-          "description": "Index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0",
+          "description": "(Optional) Specify the index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "offset",
           "value": 0,
-          "tooltip": "The number of records to skip past. By default, this option is set as 0"
+          "tooltip": "(Optional) Specify the index of the first item to be returned by this operation. This parameter is useful for pagination and for getting a subset of items. By default, this is set as 0"
         }
       ],
       "output_schema": {
@@ -2196,7 +2196,7 @@
         },
         {
           "title": "Annotation",
-          "description": "Specify annotation to modify. Note: Any pre-existing values will be deleted. The values provided on the request will be the new set of values.",
+          "description": "Specify annotation to modify.",
           "required": true,
           "editable": true,
           "visible": true,
@@ -2259,13 +2259,13 @@
       "parameters": [
         {
           "title": "Entities",
-          "tooltip": "Specify the entities based on which you want to retrieve annotation.",
+          "tooltip": "Specify the entities based on which you want to retrieve the associated annotation.",
           "required": true,
           "editable": true,
           "visible": true,
           "type": "json",
           "name": "entities",
-          "description": "Specify the entities based on which you want to retrieve annotation.",
+          "description": "Specify the entities based on which you want to retrieve the associated annotation.",
           "value": [
             {
               "entity": "10.0.0.1",
@@ -2275,13 +2275,13 @@
         },
         {
           "title": "Account UUID",
-          "description": "Specify the UUID of the account based on which you want to retrieve annotation for entities from FortiNDR Cloud.",
+          "description": "(Optional) Specify the UUID of the account based on which you want to retrieve annotation for entities from FortiNDR Cloud.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "text",
           "name": "account_uuid",
-          "tooltip": "Specify the UUID of the account based on which you want to annotation for entities from FortiNDR Cloud."
+          "tooltip": "(Optional) Specify the UUID of the account based on which you want to retrieve annotation for entities from FortiNDR Cloud."
         }
       ],
       "output_schema": {
@@ -2346,13 +2346,13 @@
         },
         {
           "title": "Replace",
-          "description": "If true, the provided entities will replace any existent entity; otherwise, they will be added. By default this parameter is set to false.",
+          "description": "(Optional) If true, the provided entities will replace any existent entity; otherwise, they will be added. By default this parameter is set to false.",
           "required": false,
           "editable": true,
           "visible": true,
           "type": "checkbox",
           "name": "replace",
-          "tooltip": "If true, the provided entities will replace any existent entity; otherwise, they will be added. By default this parameter is set to false.",
+          "tooltip": "(Optional) If true, the provided entities will replace any existent entity; otherwise, they will be added. By default this parameter is set to false.",
           "value": false
         }
       ],

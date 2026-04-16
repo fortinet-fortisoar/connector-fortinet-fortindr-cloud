@@ -8,4 +8,4 @@
     - Retrieve Annotation for Entities
     - Add or Replace Entities to Annotation
     - Execute an API Request
-- The API currently does not support multiple values for the parameters `Severity`, `Confidence`, and `Category` in the `Get Detection Rules List` action.
+- The API currently does not support multiple values for the parameters `Severity`, `Confidence`, and `Category` in the action `Get Detection Rules List`.
